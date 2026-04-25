@@ -1,328 +1,11 @@
-// // import 'package:flutter/material.dart';
-// // import 'package:modernlogintute/pages/profile_page.dart';
-// // import 'package:modernlogintute/pages/visitor_list_page.dart';
-
-// // class HomePage extends StatefulWidget {
-// //   const HomePage({super.key});
-
-// //   @override
-// //   State<HomePage> createState() => _HomePageState();
-// // }
-
-// // class _HomePageState extends State<HomePage> {
-// //   int _currentIndex = 0;
-
-// //   // Create pages for each tab
-// //   final List<Widget> _pages = [
-// //     const DashboardContent(), // Your dashboard content
-// //     const VisitorsListPage(), // Visitors list page (not create page)
-// //     const ProfilePage(), // Profile page
-// //   ];
-
-// //   void _onItemTapped(int index) {
-// //     setState(() {
-// //       _currentIndex = index;
-// //     });
-// //   }
-
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return Scaffold(
-// //       body: _pages[_currentIndex], // Show the selected page
-// //       bottomNavigationBar: BottomNavigationBar(
-// //         backgroundColor: Colors.white,
-// //         selectedItemColor: Colors.black,
-// //         unselectedItemColor: Colors.grey,
-// //         currentIndex: _currentIndex,
-// //         type: BottomNavigationBarType.fixed,
-// //         onTap: _onItemTapped,
-// //         items: const [
-// //           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-// //           BottomNavigationBarItem(icon: Icon(Icons.people), label: "Visitors"),
-// //           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-// //         ],
-// //       ),
-// //     );
-// //   }
-// // }
-
-// // // Extract your dashboard content into a separate widget
-// // class DashboardContent extends StatelessWidget {
-// //   const DashboardContent({super.key});
-
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return Scaffold(
-// //       backgroundColor: const Color(0xFFF7F8FA),
-// //       appBar: AppBar(
-// //         backgroundColor: Colors.black,
-// //         title: const Text(
-// //           "Dashboard",
-// //           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
-// //         ),
-// //         centerTitle: true,
-// //         elevation: 0,
-// //       ),
-// //       body: SafeArea(
-// //         child: Padding(
-// //           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-// //           child: Column(
-// //             crossAxisAlignment: CrossAxisAlignment.start,
-// //             children: [
-// //               // Header
-// //               Row(
-// //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// //                 children: [
-// //                   const Text(
-// //                     "Dashboard Overview",
-// //                     style: TextStyle(
-// //                       fontSize: 18,
-// //                       fontWeight: FontWeight.w700,
-// //                       color: Colors.black87,
-// //                     ),
-// //                   ),
-// //                   Container(
-// //                     padding:
-// //                         const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-// //                     decoration: BoxDecoration(
-// //                       color: Colors.white,
-// //                       borderRadius: BorderRadius.circular(20),
-// //                     ),
-// //                     child: Text(
-// //                       "Today, ${_formattedDate()}",
-// //                       style: TextStyle(
-// //                         fontSize: 11,
-// //                         color: Colors.grey[600],
-// //                       ),
-// //                     ),
-// //                   ),
-// //                 ],
-// //               ),
-// //               const SizedBox(height: 16),
-
-// //               // Stats
-// //               GridView.count(
-// //                 shrinkWrap: true,
-// //                 crossAxisCount: 3,
-// //                 crossAxisSpacing: 12,
-// //                 mainAxisSpacing: 12,
-// //                 childAspectRatio: 2.6,
-// //                 physics: const NeverScrollableScrollPhysics(),
-// //                 children: const [
-// //                   _StatCard(
-// //                     title: "Employees",
-// //                     value: "120",
-// //                     color: Color(0xFF3B82F6),
-// //                     icon: Icons.people,
-// //                   ),
-// //                   _StatCard(
-// //                     title: "Visitors",
-// //                     value: "45",
-// //                     color: Color(0xFFF59E0B),
-// //                     icon: Icons.group,
-// //                   ),
-// //                   _StatCard(
-// //                     title: "Active",
-// //                     value: "18",
-// //                     color: Color(0xFF10B981),
-// //                     icon: Icons.flash_on,
-// //                   ),
-// //                 ],
-// //               ),
-// //               const SizedBox(height: 16),
-
-// //               // Activity
-// //               Expanded(
-// //                 child: Container(
-// //                   padding: const EdgeInsets.all(14),
-// //                   decoration: BoxDecoration(
-// //                     color: Colors.white,
-// //                     borderRadius: BorderRadius.circular(14),
-// //                   ),
-// //                   child: Column(
-// //                     crossAxisAlignment: CrossAxisAlignment.start,
-// //                     children: [
-// //                       const Text(
-// //                         "Recent Activity",
-// //                         style: TextStyle(
-// //                           fontWeight: FontWeight.w700,
-// //                           fontSize: 14,
-// //                         ),
-// //                       ),
-// //                       const SizedBox(height: 10),
-// //                       Expanded(
-// //                         child: ListView.builder(
-// //                           itemCount: 5,
-// //                           itemBuilder: (context, index) {
-// //                             const items = [
-// //                               "Visitor John checked in",
-// //                               "Employee added",
-// //                               "Visitor Jane checked out",
-// //                               "Security alert triggered",
-// //                               "Visitor Alex checked in",
-// //                             ];
-// //                             return _ActivityTile(items[index]);
-// //                           },
-// //                         ),
-// //                       ),
-// //                     ],
-// //                   ),
-// //                 ),
-// //               ),
-// //             ],
-// //           ),
-// //         ),
-// //       ),
-// //     );
-// //   }
-
-// //   String _formattedDate() {
-// //     final now = DateTime.now();
-// //     return "${now.day}/${now.month}/${now.year}";
-// //   }
-// // }
-
-// // // Your existing StatCard and ActivityTile widgets remain the same
-// // class _StatCard extends StatelessWidget {
-// //   final String title;
-// //   final String value;
-// //   final Color color;
-// //   final IconData icon;
-
-// //   const _StatCard({
-// //     required this.title,
-// //     required this.value,
-// //     required this.color,
-// //     required this.icon,
-// //   });
-
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return Container(
-// //       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-// //       decoration: BoxDecoration(
-// //         color: color.withOpacity(0.08),
-// //         borderRadius: BorderRadius.circular(12),
-// //       ),
-// //       child: Row(
-// //         children: [
-// //           Icon(icon, color: color, size: 18),
-// //           const SizedBox(width: 10),
-// //           Column(
-// //             crossAxisAlignment: CrossAxisAlignment.start,
-// //             mainAxisAlignment: MainAxisAlignment.center,
-// //             children: [
-// //               Text(
-// //                 value,
-// //                 style: TextStyle(
-// //                   fontWeight: FontWeight.bold,
-// //                   color: color,
-// //                 ),
-// //               ),
-// //               Text(
-// //                 title,
-// //                 style: const TextStyle(
-// //                   fontSize: 10,
-// //                   color: Colors.grey,
-// //                 ),
-// //               ),
-// //             ],
-// //           ),
-// //         ],
-// //       ),
-// //     );
-// //   }
-// // }
-
-// // class _ActivityTile extends StatelessWidget {
-// //   final String text;
-// //   const _ActivityTile(this.text);
-
-// //   IconData get _icon {
-// //     if (text.contains("checked in")) return Icons.login;
-// //     if (text.contains("checked out")) return Icons.logout;
-// //     if (text.contains("added")) return Icons.person_add;
-// //     if (text.contains("alert")) return Icons.warning_amber_rounded;
-// //     return Icons.info_outline;
-// //   }
-
-// //   Color get _color {
-// //     if (text.contains("checked in")) return Colors.green;
-// //     if (text.contains("checked out")) return Colors.orange;
-// //     if (text.contains("added")) return Colors.blue;
-// //     if (text.contains("alert")) return Colors.red;
-// //     return Colors.grey;
-// //   }
-
-// //   String get _time {
-// //     if (text.contains("John")) return "09:14 AM";
-// //     if (text.contains("added")) return "09:02 AM";
-// //     if (text.contains("Jane")) return "08:55 AM";
-// //     if (text.contains("alert")) return "08:40 AM";
-// //     if (text.contains("Alex")) return "08:30 AM";
-// //     return "Recently";
-// //   }
-
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return Padding(
-// //       padding: const EdgeInsets.symmetric(vertical: 6),
-// //       child: Row(
-// //         children: [
-// //           Container(
-// //             width: 32,
-// //             height: 32,
-// //             decoration: BoxDecoration(
-// //               color: _color.withOpacity(0.08),
-// //               borderRadius: BorderRadius.circular(8),
-// //             ),
-// //             child: Icon(_icon, size: 16, color: _color),
-// //           ),
-// //           const SizedBox(width: 10),
-// //           Expanded(
-// //             child: Column(
-// //               crossAxisAlignment: CrossAxisAlignment.start,
-// //               children: [
-// //                 Text(
-// //                   text,
-// //                   style: const TextStyle(
-// //                     fontSize: 12,
-// //                     fontWeight: FontWeight.w600,
-// //                     color: Colors.black87,
-// //                   ),
-// //                   overflow: TextOverflow.ellipsis,
-// //                 ),
-// //                 const SizedBox(height: 2),
-// //                 Text(
-// //                   _time,
-// //                   style: TextStyle(
-// //                     fontSize: 10,
-// //                     color: Colors.grey[500],
-// //                     fontWeight: FontWeight.w400,
-// //                   ),
-// //                 ),
-// //               ],
-// //             ),
-// //           ),
-// //           Container(
-// //             width: 6,
-// //             height: 6,
-// //             decoration: BoxDecoration(
-// //               color: _color,
-// //               shape: BoxShape.circle,
-// //             ),
-// //           ),
-// //         ],
-// //       ),
-// //     );
-// //   }
-// // }
-
-// // // Simple Profile Page
-
 // import 'package:flutter/material.dart';
+// import 'package:modernlogintute/pages/pending_approvals_page.dart';
 // import 'package:modernlogintute/pages/profile_page.dart';
 // import 'package:modernlogintute/pages/visitor_list_page.dart';
+// import 'package:modernlogintute/services/api_services.dart';
+// import 'package:web_socket_channel/web_socket_channel.dart';
+// import 'package:web_socket_channel/io.dart';
+// import 'dart:convert';
 
 // class HomePage extends StatefulWidget {
 //   const HomePage({super.key});
@@ -367,8 +50,1544 @@
 //   }
 // }
 
-// class DashboardContent extends StatelessWidget {
+// **************************
+// import 'package:flutter/material.dart';
+// import 'package:modernlogintute/pages/pending_approvals_page.dart';
+// import 'package:modernlogintute/pages/profile_page.dart';
+// import 'package:modernlogintute/pages/visitor_list_page.dart';
+// import 'package:modernlogintute/services/api_services.dart';
+// import 'package:web_socket_channel/web_socket_channel.dart';
+// import 'package:web_socket_channel/io.dart';
+// import 'dart:convert';
+// import 'dart:typed_data';
+// import 'dart:html' as html;
+
+// class HomePage extends StatefulWidget {
+//   const HomePage({super.key});
+
+//   @override
+//   State<HomePage> createState() => _HomePageState();
+// }
+
+// class _HomePageState extends State<HomePage> {
+//   int _currentIndex = 0;
+//   Map<String, dynamic>? _currentEmployee;
+//   bool _isLoadingEmployee = true;
+//   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+//   final List<Widget> _pages = [
+//     const DashboardContent(),
+//     const VisitorsListPage(),
+//     const ProfilePage(),
+//   ];
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _fetchCurrentEmployee();
+//   }
+
+//   Future<void> _fetchCurrentEmployee() async {
+//     try {
+//       final employee = await ApiService.getCurrentEmployee();
+//       setState(() {
+//         _currentEmployee = employee;
+//         _isLoadingEmployee = false;
+//       });
+//     } catch (e) {
+//       print('Error fetching employee: $e');
+//       setState(() {
+//         _isLoadingEmployee = false;
+//       });
+//     }
+//   }
+
+//   void _onItemTapped(int index) {
+//     setState(() {
+//       _currentIndex = index;
+//     });
+//   }
+
+//   void _openDrawer() {
+//     _scaffoldKey.currentState?.openDrawer();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       key: _scaffoldKey,
+//       body: _pages[_currentIndex],
+//       bottomNavigationBar: BottomNavigationBar(
+//         backgroundColor: Colors.white,
+//         selectedItemColor: Colors.black,
+//         unselectedItemColor: Colors.grey,
+//         currentIndex: _currentIndex,
+//         type: BottomNavigationBarType.fixed,
+//         onTap: _onItemTapped,
+//         items: const [
+//           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+//           BottomNavigationBarItem(icon: Icon(Icons.people), label: "Visitors"),
+//           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+//         ],
+//       ),
+//       drawer: _buildDrawer(),
+//     );
+//   }
+
+//   Widget _buildDrawer() {
+//     return Drawer(
+//       child: Container(
+//         color: Colors.white,
+//         child: Column(
+//           children: [
+//             // Drawer Header with Profile
+//             _buildDrawerHeader(),
+
+//             // Menu Items
+//             Expanded(
+//               child: ListView(
+//                 padding: EdgeInsets.zero,
+//                 children: [
+//                   _buildDrawerItem(
+//                     icon: Icons.assessment,
+//                     title: 'Reports',
+//                     onTap: () {
+//                       Navigator.pop(context);
+//                       _openReportsPage();
+//                     },
+//                   ),
+//                   _buildDrawerItem(
+//                     icon: Icons.credit_card,
+//                     title: 'Generate ID Card',
+//                     onTap: () {
+//                       Navigator.pop(context);
+//                       _openGenerateIDCardPage();
+//                     },
+//                   ),
+//                   const Divider(),
+//                   _buildDrawerItem(
+//                     icon: Icons.logout,
+//                     title: 'Logout',
+//                     onTap: _logout,
+//                     color: Colors.red,
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget _buildDrawerHeader() {
+//     return Container(
+//       padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+//       decoration: BoxDecoration(
+//         color: Colors.blue.shade700,
+//         borderRadius: const BorderRadius.only(
+//           bottomLeft: Radius.circular(20),
+//           bottomRight: Radius.circular(20),
+//         ),
+//       ),
+//       child: Column(
+//         children: [
+//           // Profile Photo
+//           Container(
+//             width: 80,
+//             height: 80,
+//             decoration: BoxDecoration(
+//               shape: BoxShape.circle,
+//               border: Border.all(color: Colors.white, width: 3),
+//               boxShadow: [
+//                 BoxShadow(
+//                   color: Colors.black.withOpacity(0.2),
+//                   blurRadius: 10,
+//                   offset: const Offset(0, 2),
+//                 ),
+//               ],
+//             ),
+//             child: _buildProfilePhoto(),
+//           ),
+//           const SizedBox(height: 12),
+//           // Employee Name
+//           Text(
+//             _currentEmployee?['full_name'] ?? 'Loading...',
+//             style: const TextStyle(
+//               color: Colors.white,
+//               fontSize: 18,
+//               fontWeight: FontWeight.bold,
+//             ),
+//           ),
+//           const SizedBox(height: 4),
+//           // Employee Email
+//           Text(
+//             _currentEmployee?['email'] ?? '',
+//             style: TextStyle(
+//               color: Colors.white.withOpacity(0.8),
+//               fontSize: 12,
+//             ),
+//           ),
+//           const SizedBox(height: 4),
+//           // Department & Designation
+//           Text(
+//             '${_currentEmployee?['department'] ?? ''} • ${_currentEmployee?['designation'] ?? ''}',
+//             style: TextStyle(
+//               color: Colors.white.withOpacity(0.7),
+//               fontSize: 11,
+//             ),
+//           ),
+//           const SizedBox(height: 12),
+//           // Menu Icon Hint
+//           Container(
+//             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+//             decoration: BoxDecoration(
+//               color: Colors.white.withOpacity(0.2),
+//               borderRadius: BorderRadius.circular(20),
+//             ),
+//             child: const Row(
+//               mainAxisSize: MainAxisSize.min,
+//               children: [
+//                 Icon(Icons.menu, color: Colors.white, size: 14),
+//                 SizedBox(width: 4),
+//                 Text(
+//                   'Menu',
+//                   style: TextStyle(color: Colors.white, fontSize: 10),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Widget _buildProfilePhoto() {
+//     if (_isLoadingEmployee) {
+//       return const Center(
+//         child: CircularProgressIndicator(color: Colors.white),
+//       );
+//     }
+
+//     final photoUrl = _currentEmployee?['profile_picture'];
+
+//     if (photoUrl != null && photoUrl.isNotEmpty) {
+//       return ClipOval(
+//         child: Image.network(
+//           photoUrl,
+//           width: 80,
+//           height: 80,
+//           fit: BoxFit.cover,
+//           errorBuilder: (context, error, stackTrace) {
+//             return _buildInitialsAvatar();
+//           },
+//         ),
+//       );
+//     } else {
+//       return _buildInitialsAvatar();
+//     }
+//   }
+
+//   Widget _buildInitialsAvatar() {
+//     final name = _currentEmployee?['full_name'] ?? 'User';
+//     final initials = name
+//         .split(' ')
+//         .map((part) => part.isNotEmpty ? part[0] : '')
+//         .take(2)
+//         .join()
+//         .toUpperCase();
+
+//     return Container(
+//       width: 80,
+//       height: 80,
+//       decoration: BoxDecoration(
+//         color: Colors.white.withOpacity(0.3),
+//         shape: BoxShape.circle,
+//       ),
+//       child: Center(
+//         child: Text(
+//           initials,
+//           style: const TextStyle(
+//             color: Colors.white,
+//             fontSize: 28,
+//             fontWeight: FontWeight.bold,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget _buildDrawerItem({
+//     required IconData icon,
+//     required String title,
+//     required VoidCallback onTap,
+//     Color color = Colors.black87,
+//   }) {
+//     return ListTile(
+//       leading: Icon(icon, color: color),
+//       title: Text(
+//         title,
+//         style: TextStyle(
+//           color: color,
+//           fontSize: 16,
+//         ),
+//       ),
+//       trailing: Icon(Icons.chevron_right, color: Colors.grey.shade400),
+//       onTap: onTap,
+//     );
+//   }
+
+//   void _openReportsPage() {
+//     // Navigate to reports page
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => const ReportsPage()),
+//     );
+//   }
+
+//   void _openGenerateIDCardPage() {
+//     // Navigate to Generate ID Card page
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => const GenerateIDCardPage()),
+//     );
+//   }
+
+//   Future<void> _logout() async {
+//     final confirmed = await showDialog<bool>(
+//       context: context,
+//       builder: (context) => AlertDialog(
+//         title: const Text('Logout'),
+//         content: const Text('Are you sure you want to logout?'),
+//         actions: [
+//           TextButton(
+//             onPressed: () => Navigator.pop(context, false),
+//             child: const Text('Cancel'),
+//           ),
+//           ElevatedButton(
+//             onPressed: () => Navigator.pop(context, true),
+//             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+//             child: const Text('Logout'),
+//           ),
+//         ],
+//       ),
+//     );
+
+//     if (confirmed == true) {
+//       await ApiService.logout();
+//       if (mounted) {
+//         Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+//       }
+//     }
+//   }
+// }
+
+// // Reports Page
+// class ReportsPage extends StatefulWidget {
+//   const ReportsPage({super.key});
+
+//   @override
+//   State<ReportsPage> createState() => _ReportsPageState();
+// }
+
+// class _ReportsPageState extends State<ReportsPage> {
+//   bool _isLoading = false;
+//   DateTime? _startDate;
+//   DateTime? _endDate;
+//   String _selectedStatus = 'all';
+//   final List<String> _statusOptions = [
+//     'all',
+//     'pending',
+//     'approved',
+//     'rejected',
+//     'checked_in',
+//     'checked_out'
+//   ];
+
+//   Future<void> _exportReport() async {
+//     if (_startDate == null || _endDate == null) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(
+//           content: Text('Please select both start and end dates'),
+//           backgroundColor: Colors.orange,
+//         ),
+//       );
+//       return;
+//     }
+
+//     setState(() => _isLoading = true);
+
+//     try {
+//       final response = await ApiService.exportVisitorsReport(
+//         _startDate!,
+//         _endDate!,
+//         status: _selectedStatus,
+//       );
+
+//       // Save file
+//       final blob = html.Blob([response]);
+//       final url = html.Url.createObjectUrlFromBlob(blob);
+//       final anchor = html.AnchorElement(href: url)
+//         ..target = 'blank'
+//         ..download =
+//             'visitors_report_${_startDate!.toIso8601String().split('T')[0]}_to_${_endDate!.toIso8601String().split('T')[0]}.xlsx';
+//       anchor.click();
+//       html.Url.revokeObjectUrl(url);
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(
+//           content: Text('Report exported successfully!'),
+//           backgroundColor: Colors.green,
+//         ),
+//       );
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
+//       );
+//     } finally {
+//       setState(() => _isLoading = false);
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.grey[100],
+//       appBar: AppBar(
+//         backgroundColor: Colors.black,
+//         title: const Text(
+//           'Reports',
+//           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+//         ),
+//         centerTitle: true,
+//         elevation: 0,
+//         leading: IconButton(
+//           icon: const Icon(Icons.arrow_back, color: Colors.white),
+//           onPressed: () => Navigator.pop(context),
+//         ),
+//       ),
+//       body: SingleChildScrollView(
+//         padding: const EdgeInsets.all(20),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             // Header
+//             Container(
+//               padding: const EdgeInsets.all(20),
+//               decoration: BoxDecoration(
+//                 color: Colors.white,
+//                 borderRadius: BorderRadius.circular(16),
+//                 boxShadow: [
+//                   BoxShadow(
+//                     color: Colors.black.withOpacity(0.03),
+//                     blurRadius: 8,
+//                     offset: const Offset(0, 2),
+//                   ),
+//                 ],
+//               ),
+//               child: Row(
+//                 children: [
+//                   Container(
+//                     padding: const EdgeInsets.all(12),
+//                     decoration: BoxDecoration(
+//                       color: Colors.blue.withOpacity(0.1),
+//                       borderRadius: BorderRadius.circular(12),
+//                     ),
+//                     child: const Icon(Icons.assessment,
+//                         color: Colors.blue, size: 28),
+//                   ),
+//                   const SizedBox(width: 16),
+//                   const Expanded(
+//                     child: Text(
+//                       'Export Visitors Report',
+//                       style: TextStyle(
+//                         fontSize: 18,
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             const SizedBox(height: 24),
+
+//             // Date Range Selection
+//             Container(
+//               padding: const EdgeInsets.all(20),
+//               decoration: BoxDecoration(
+//                 color: Colors.white,
+//                 borderRadius: BorderRadius.circular(16),
+//                 boxShadow: [
+//                   BoxShadow(
+//                     color: Colors.black.withOpacity(0.03),
+//                     blurRadius: 8,
+//                     offset: const Offset(0, 2),
+//                   ),
+//                 ],
+//               ),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   const Text(
+//                     'Select Date Range',
+//                     style: TextStyle(
+//                       fontSize: 16,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ),
+//                   const SizedBox(height: 16),
+//                   // Start Date
+//                   GestureDetector(
+//                     onTap: () => _selectDate(context, isStart: true),
+//                     child: Container(
+//                       padding: const EdgeInsets.symmetric(
+//                           horizontal: 16, vertical: 14),
+//                       decoration: BoxDecoration(
+//                         color: Colors.grey[50],
+//                         borderRadius: BorderRadius.circular(12),
+//                         border: Border.all(color: Colors.grey[300]!),
+//                       ),
+//                       child: Row(
+//                         children: [
+//                           const Icon(Icons.calendar_today,
+//                               size: 20, color: Colors.grey),
+//                           const SizedBox(width: 12),
+//                           Expanded(
+//                             child: Text(
+//                               _startDate != null
+//                                   ? 'Start Date: ${_formatDate(_startDate!)}'
+//                                   : 'Select Start Date',
+//                               style: TextStyle(
+//                                 color: _startDate != null
+//                                     ? Colors.black87
+//                                     : Colors.grey[500],
+//                               ),
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ),
+//                   const SizedBox(height: 12),
+//                   // End Date
+//                   GestureDetector(
+//                     onTap: () => _selectDate(context, isStart: false),
+//                     child: Container(
+//                       padding: const EdgeInsets.symmetric(
+//                           horizontal: 16, vertical: 14),
+//                       decoration: BoxDecoration(
+//                         color: Colors.grey[50],
+//                         borderRadius: BorderRadius.circular(12),
+//                         border: Border.all(color: Colors.grey[300]!),
+//                       ),
+//                       child: Row(
+//                         children: [
+//                           const Icon(Icons.calendar_today,
+//                               size: 20, color: Colors.grey),
+//                           const SizedBox(width: 12),
+//                           Expanded(
+//                             child: Text(
+//                               _endDate != null
+//                                   ? 'End Date: ${_formatDate(_endDate!)}'
+//                                   : 'Select End Date',
+//                               style: TextStyle(
+//                                 color: _endDate != null
+//                                     ? Colors.black87
+//                                     : Colors.grey[500],
+//                               ),
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             const SizedBox(height: 20),
+
+//             // Status Filter
+//             Container(
+//               padding: const EdgeInsets.all(20),
+//               decoration: BoxDecoration(
+//                 color: Colors.white,
+//                 borderRadius: BorderRadius.circular(16),
+//                 boxShadow: [
+//                   BoxShadow(
+//                     color: Colors.black.withOpacity(0.03),
+//                     blurRadius: 8,
+//                     offset: const Offset(0, 2),
+//                   ),
+//                 ],
+//               ),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   const Text(
+//                     'Filter by Status',
+//                     style: TextStyle(
+//                       fontSize: 16,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ),
+//                   const SizedBox(height: 12),
+//                   DropdownButtonFormField<String>(
+//                     value: _selectedStatus,
+//                     decoration: InputDecoration(
+//                       border: OutlineInputBorder(
+//                         borderRadius: BorderRadius.circular(12),
+//                       ),
+//                       contentPadding:
+//                           const EdgeInsets.symmetric(horizontal: 16),
+//                     ),
+//                     items: _statusOptions.map((status) {
+//                       return DropdownMenuItem(
+//                         value: status,
+//                         child: Text(status.toUpperCase()),
+//                       );
+//                     }).toList(),
+//                     onChanged: (value) {
+//                       setState(() {
+//                         _selectedStatus = value!;
+//                       });
+//                     },
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             const SizedBox(height: 24),
+
+//             // Export Button
+//             SizedBox(
+//               width: double.infinity,
+//               child: ElevatedButton(
+//                 onPressed: _isLoading ? null : _exportReport,
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Colors.green,
+//                   foregroundColor: Colors.white,
+//                   padding: const EdgeInsets.symmetric(vertical: 16),
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(12),
+//                   ),
+//                 ),
+//                 child: _isLoading
+//                     ? const SizedBox(
+//                         height: 20,
+//                         width: 20,
+//                         child: CircularProgressIndicator(
+//                           strokeWidth: 2,
+//                           color: Colors.white,
+//                         ),
+//                       )
+//                     : const Row(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           Icon(Icons.download, size: 20),
+//                           SizedBox(width: 8),
+//                           Text('Export Report'),
+//                         ],
+//                       ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   Future<void> _selectDate(BuildContext context,
+//       {required bool isStart}) async {
+//     final picked = await showDatePicker(
+//       context: context,
+//       initialDate: DateTime.now(),
+//       firstDate: DateTime(2020),
+//       lastDate: DateTime.now(),
+//     );
+//     if (picked != null) {
+//       setState(() {
+//         if (isStart) {
+//           _startDate = picked;
+//         } else {
+//           _endDate = picked;
+//         }
+//       });
+//     }
+//   }
+
+//   String _formatDate(DateTime date) {
+//     return '${date.day}/${date.month}/${date.year}';
+//   }
+// }
+
+// // Generate ID Card Page
+// class GenerateIDCardPage extends StatefulWidget {
+//   const GenerateIDCardPage({super.key});
+
+//   @override
+//   State<GenerateIDCardPage> createState() => _GenerateIDCardPageState();
+// }
+
+// class _GenerateIDCardPageState extends State<GenerateIDCardPage> {
+//   List<dynamic> _visitors = [];
+//   List<int> _selectedVisitorIds = [];
+//   bool _isLoading = true;
+//   bool _isGenerating = false;
+//   bool _withPhoto = false;
+//   String _searchQuery = '';
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _fetchApprovedVisitors();
+//   }
+
+//   Future<void> _fetchApprovedVisitors() async {
+//     setState(() => _isLoading = true);
+//     try {
+//       final allVisitors = await ApiService.getAllVisitors();
+//       // Filter only approved or partially approved visitors
+//       final approvedVisitors = allVisitors.where((v) {
+//         final status = v['status'] ?? '';
+//         return status == 'approved' || status == 'partially_approved';
+//       }).toList();
+
+//       setState(() {
+//         _visitors = approvedVisitors;
+//         _isLoading = false;
+//       });
+//     } catch (e) {
+//       setState(() {
+//         _isLoading = false;
+//       });
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
+//       );
+//     }
+//   }
+
+//   Future<void> _generateIDCard() async {
+//     if (_selectedVisitorIds.isEmpty) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(
+//           content: Text('Please select at least one visitor'),
+//           backgroundColor: Colors.orange,
+//         ),
+//       );
+//       return;
+//     }
+
+//     setState(() => _isGenerating = true);
+
+//     try {
+//       if (_selectedVisitorIds.length == 1) {
+//         // Single ID card
+//         final bytes = await ApiService.downloadIDCard(
+//           _selectedVisitorIds.first,
+//           withPhoto: _withPhoto,
+//         );
+//         if (bytes != null) {
+//           final blob = html.Blob([bytes]);
+//           final url = html.Url.createObjectUrlFromBlob(blob);
+//           final anchor = html.AnchorElement(href: url)
+//             ..target = 'blank'
+//             ..download = 'visitor_id_card_${_selectedVisitorIds.first}.pdf';
+//           anchor.click();
+//           html.Url.revokeObjectUrl(url);
+//         }
+//       } else {
+//         // Bulk ID cards
+//         final bytes = await ApiService.bulkDownloadIDCards(_selectedVisitorIds);
+//         if (bytes != null) {
+//           final blob = html.Blob([bytes]);
+//           final url = html.Url.createObjectUrlFromBlob(blob);
+//           final anchor = html.AnchorElement(href: url)
+//             ..target = 'blank'
+//             ..download = 'bulk_id_cards.pdf';
+//           anchor.click();
+//           html.Url.revokeObjectUrl(url);
+//         }
+//       }
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(
+//           content: Text('ID Card(s) generated successfully!'),
+//           backgroundColor: Colors.green,
+//         ),
+//       );
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
+//       );
+//     } finally {
+//       setState(() => _isGenerating = false);
+//     }
+//   }
+
+//   List<dynamic> get _filteredVisitors {
+//     if (_searchQuery.isEmpty) return _visitors;
+//     return _visitors.where((v) {
+//       final name = v['full_name']?.toLowerCase() ?? '';
+//       final email = v['email']?.toLowerCase() ?? '';
+//       final query = _searchQuery.toLowerCase();
+//       return name.contains(query) || email.contains(query);
+//     }).toList();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.grey[100],
+//       appBar: AppBar(
+//         backgroundColor: Colors.black,
+//         title: const Text(
+//           'Generate ID Card',
+//           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+//         ),
+//         centerTitle: true,
+//         elevation: 0,
+//         leading: IconButton(
+//           icon: const Icon(Icons.arrow_back, color: Colors.white),
+//           onPressed: () => Navigator.pop(context),
+//         ),
+//         actions: [
+//           IconButton(
+//             icon: const Icon(Icons.refresh, color: Colors.white),
+//             onPressed: _fetchApprovedVisitors,
+//           ),
+//         ],
+//       ),
+//       body: Column(
+//         children: [
+//           // Search Bar
+//           Padding(
+//             padding: const EdgeInsets.all(16),
+//             child: Container(
+//               decoration: BoxDecoration(
+//                 color: Colors.white,
+//                 borderRadius: BorderRadius.circular(12),
+//                 boxShadow: [
+//                   BoxShadow(
+//                     color: Colors.black.withOpacity(0.05),
+//                     blurRadius: 4,
+//                     offset: const Offset(0, 2),
+//                   ),
+//                 ],
+//               ),
+//               child: TextField(
+//                 onChanged: (value) => setState(() => _searchQuery = value),
+//                 decoration: InputDecoration(
+//                   hintText: 'Search visitors...',
+//                   prefixIcon: const Icon(Icons.search, color: Colors.grey),
+//                   border: OutlineInputBorder(
+//                     borderRadius: BorderRadius.circular(12),
+//                     borderSide: BorderSide.none,
+//                   ),
+//                   filled: true,
+//                   fillColor: Colors.white,
+//                 ),
+//               ),
+//             ),
+//           ),
+
+//           // Options
+//           Container(
+//             margin: const EdgeInsets.symmetric(horizontal: 16),
+//             padding: const EdgeInsets.all(12),
+//             decoration: BoxDecoration(
+//               color: Colors.white,
+//               borderRadius: BorderRadius.circular(12),
+//             ),
+//             child: Row(
+//               children: [
+//                 const Text('Include Photo:'),
+//                 const SizedBox(width: 12),
+//                 Switch(
+//                   value: _withPhoto,
+//                   onChanged: (value) => setState(() => _withPhoto = value),
+//                   activeColor: Colors.blue,
+//                 ),
+//                 const Spacer(),
+//                 Text(
+//                   'Selected: ${_selectedVisitorIds.length}',
+//                   style: const TextStyle(
+//                     fontWeight: FontWeight.w600,
+//                     color: Colors.blue,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+
+//           const SizedBox(height: 12),
+
+//           // Visitors List
+//           Expanded(
+//             child: _isLoading
+//                 ? const Center(child: CircularProgressIndicator())
+//                 : _filteredVisitors.isEmpty
+//                     ? const Center(
+//                         child: Text('No approved visitors found'),
+//                       )
+//                     : ListView.builder(
+//                         padding: const EdgeInsets.all(16),
+//                         itemCount: _filteredVisitors.length,
+//                         itemBuilder: (context, index) {
+//                           final visitor = _filteredVisitors[index];
+//                           final isSelected =
+//                               _selectedVisitorIds.contains(visitor['id']);
+//                           return Card(
+//                             margin: const EdgeInsets.only(bottom: 12),
+//                             child: CheckboxListTile(
+//                               title: Text(
+//                                 visitor['full_name'] ?? 'Unknown',
+//                                 style: const TextStyle(
+//                                     fontWeight: FontWeight.w600),
+//                               ),
+//                               subtitle: Column(
+//                                 crossAxisAlignment: CrossAxisAlignment.start,
+//                                 children: [
+//                                   Text(visitor['email'] ?? 'No email'),
+//                                   Text(
+//                                     'Status: ${visitor['status']?.toUpperCase() ?? 'UNKNOWN'}',
+//                                     style: TextStyle(
+//                                       color: visitor['status'] == 'approved'
+//                                           ? Colors.green
+//                                           : Colors.orange,
+//                                       fontSize: 12,
+//                                     ),
+//                                   ),
+//                                 ],
+//                               ),
+//                               value: isSelected,
+//                               onChanged: (selected) {
+//                                 setState(() {
+//                                   if (selected == true) {
+//                                     _selectedVisitorIds.add(visitor['id']);
+//                                   } else {
+//                                     _selectedVisitorIds.remove(visitor['id']);
+//                                   }
+//                                 });
+//                               },
+//                               secondary: const Icon(Icons.credit_card,
+//                                   color: Colors.blue),
+//                             ),
+//                           );
+//                         },
+//                       ),
+//           ),
+
+//           // Generate Button
+//           Container(
+//             padding: const EdgeInsets.all(16),
+//             decoration: BoxDecoration(
+//               color: Colors.white,
+//               boxShadow: [
+//                 BoxShadow(
+//                   color: Colors.black.withOpacity(0.05),
+//                   blurRadius: 8,
+//                   offset: const Offset(0, -2),
+//                 ),
+//               ],
+//             ),
+//             child: SizedBox(
+//               width: double.infinity,
+//               child: ElevatedButton(
+//                 onPressed: _isGenerating ? null : _generateIDCard,
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Colors.blue,
+//                   foregroundColor: Colors.white,
+//                   padding: const EdgeInsets.symmetric(vertical: 14),
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(12),
+//                   ),
+//                 ),
+//                 child: _isGenerating
+//                     ? const SizedBox(
+//                         height: 20,
+//                         width: 20,
+//                         child: CircularProgressIndicator(
+//                           strokeWidth: 2,
+//                           color: Colors.white,
+//                         ),
+//                       )
+//                     : const Row(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           Icon(Icons.print, size: 20),
+//                           SizedBox(width: 8),
+//                           Text('Generate ID Card(s)'),
+//                         ],
+//                       ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// class DashboardContent extends StatefulWidget {
 //   const DashboardContent({super.key});
+
+//   @override
+//   State<DashboardContent> createState() => _DashboardContentState();
+// }
+
+// class _DashboardContentState extends State<DashboardContent> {
+//   bool _isLoading = true;
+//   int _pendingApprovals = 0;
+//   int _lateVisitors = 0;
+//   int _scheduledToday = 0;
+//   String? _errorMessage;
+
+//   // Notifications
+//   List<NotificationItem> _existingNotifications = [];
+//   List<NotificationItem> _realtimeNotifications = [];
+//   bool _loadingNotifications = true;
+//   WebSocketChannel? _channel;
+//   int _unreadCount = 0;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     WidgetsBinding.instance.addPostFrameCallback((_) {
+//       _fetchDashboardCounts();
+//       _fetchExistingNotifications();
+//       _connectWebSocket();
+//     });
+//   }
+
+//   @override
+//   void dispose() {
+//     _channel?.sink.close();
+//     super.dispose();
+//   }
+
+//   Future<void> _connectWebSocket() async {
+//     try {
+//       final token = await ApiService.getAccessToken();
+//       if (token == null) {
+//         print('No token available for WebSocket connection');
+//         return;
+//       }
+
+//       final wsUrl =
+//           Uri.parse('ws://localhost:8001/ws/notifications/?token=$token');
+//       _channel = IOWebSocketChannel.connect(wsUrl);
+
+//       _channel!.stream.listen(
+//         (message) {
+//           _handleWebSocketMessage(message);
+//         },
+//         onError: (error) {
+//           print('WebSocket error: $error');
+//         },
+//         onDone: () {
+//           print('WebSocket connection closed');
+//           // Attempt to reconnect after 5 seconds
+//           Future.delayed(const Duration(seconds: 5), () {
+//             if (mounted) {
+//               _connectWebSocket();
+//             }
+//           });
+//         },
+//       );
+//     } catch (e) {
+//       print('Failed to connect WebSocket: $e');
+//     }
+//   }
+
+//   // void _handleWebSocketMessage(dynamic message) {
+//   //   try {
+//   //     final Map<String, dynamic> data = json.decode(message);
+
+//   //     if (data['type'] == 'notification') {
+//   //       final notificationData = data['data'];
+//   //       final notification = NotificationItem.fromWebSocket(notificationData);
+
+//   //       setState(() {
+//   //         _realtimeNotifications.insert(0, notification);
+//   //         _unreadCount++;
+//   //       });
+
+//   //       // Show a snackbar for real-time notifications
+//   //       _showNotificationSnackBar(notification);
+//   //     }
+//   //   } catch (e) {
+//   //     print('Error parsing WebSocket message: $e');
+//   //   }
+//   // }
+
+//   void _handleWebSocketMessage(dynamic message) {
+//     try {
+//       print('Raw WebSocket message: $message'); // Debug print
+
+//       Map<String, dynamic> data;
+
+//       // Check if message is already a Map or needs parsing
+//       if (message is String) {
+//         data = json.decode(message);
+//       } else if (message is Map<String, dynamic>) {
+//         data = message;
+//       } else {
+//         print('Unexpected message type: ${message.runtimeType}');
+//         return;
+//       }
+
+//       print('Parsed data: $data'); // Debug print
+
+//       // Check if the message has a 'data' field containing the notification
+//       Map<String, dynamic> notificationData;
+
+//       if (data.containsKey('data') && data['data'] is Map<String, dynamic>) {
+//         // Format: {"type": "notification", "data": {...}}
+//         notificationData = data['data'];
+//       } else if (data.containsKey('title') && data.containsKey('message')) {
+//         // Format: Direct notification object
+//         notificationData = data;
+//       } else {
+//         print('Unknown notification format: $data');
+//         return;
+//       }
+
+//       final notification = NotificationItem(
+//         id: notificationData['id'] ?? DateTime.now().millisecondsSinceEpoch,
+//         type: notificationData['type'] ?? data['type'] ?? 'notification',
+//         title: notificationData['title'] ?? 'New Notification',
+//         message: notificationData['message'] ?? 'You have a new notification',
+//         createdAt: DateTime.now(),
+//         isRead: false,
+//         data: notificationData,
+//       );
+
+//       setState(() {
+//         _realtimeNotifications.insert(0, notification);
+//         _unreadCount++;
+//       });
+
+//       // Show a snackbar for real-time notifications
+//       _showNotificationSnackBar(notification);
+//     } catch (e) {
+//       print('Error parsing WebSocket message: $e');
+//       print('Raw message was: $message');
+//     }
+//   }
+
+//   void _showNotificationSnackBar(NotificationItem notification) {
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(
+//         content: Row(
+//           children: [
+//             Icon(
+//               _getNotificationIcon(notification.type),
+//               color: Colors.white,
+//               size: 20,
+//             ),
+//             const SizedBox(width: 12),
+//             Expanded(
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 mainAxisSize: MainAxisSize.min,
+//                 children: [
+//                   Text(
+//                     notification.title,
+//                     style: const TextStyle(
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 14,
+//                     ),
+//                   ),
+//                   Text(
+//                     notification.message,
+//                     style: const TextStyle(fontSize: 12),
+//                     maxLines: 2,
+//                     overflow: TextOverflow.ellipsis,
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//         backgroundColor:
+//             notification.isUrgent ? Colors.red.shade700 : Colors.black87,
+//         duration: const Duration(seconds: 4),
+//         action: SnackBarAction(
+//           label: 'View',
+//           onPressed: () {
+//             // Navigate to appropriate page based on notification type
+//             _handleNotificationTap(notification);
+//           },
+//         ),
+//       ),
+//     );
+//   }
+
+//   Future<void> _fetchExistingNotifications() async {
+//     if (!mounted) return;
+
+//     setState(() {
+//       _loadingNotifications = true;
+//     });
+
+//     try {
+//       final token = await ApiService.getAccessToken();
+//       if (token == null) return;
+
+//       final response = await ApiService.getNotifications();
+
+//       setState(() {
+//         _existingNotifications =
+//             (response as List).map((n) => NotificationItem.fromApi(n)).toList();
+//         _unreadCount = _existingNotifications.where((n) => !n.isRead).length;
+//         _loadingNotifications = false;
+//       });
+//     } catch (e) {
+//       print('Error fetching notifications: $e');
+//       setState(() {
+//         _loadingNotifications = false;
+//       });
+//     }
+//   }
+
+//   Future<void> _markAsRead(int id, bool isRealtime, int index) async {
+//     try {
+//       await ApiService.markNotificationRead(id);
+
+//       setState(() {
+//         if (isRealtime) {
+//           _realtimeNotifications[index].isRead = true;
+//         } else {
+//           _existingNotifications[index].isRead = true;
+//         }
+//         _unreadCount = _getTotalUnreadCount();
+//       });
+//     } catch (e) {
+//       print('Error marking notification as read: $e');
+//     }
+//   }
+
+//   Future<void> _markAllAsRead() async {
+//     try {
+//       await ApiService.markAllNotificationsRead();
+
+//       setState(() {
+//         for (var notification in _existingNotifications) {
+//           notification.isRead = true;
+//         }
+//         for (var notification in _realtimeNotifications) {
+//           notification.isRead = true;
+//         }
+//         _unreadCount = 0;
+//       });
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text('All notifications marked as read')),
+//       );
+//     } catch (e) {
+//       print('Error marking all as read: $e');
+//     }
+//   }
+
+//   int _getTotalUnreadCount() {
+//     int count = _existingNotifications.where((n) => !n.isRead).length;
+//     count += _realtimeNotifications.where((n) => !n.isRead).length;
+//     return count;
+//   }
+
+//   IconData _getNotificationIcon(String type) {
+//     switch (type) {
+//       case 'approval_request':
+//         return Icons.person_add_alt_1;
+//       case 'approval_update':
+//         return Icons.check_circle_outline;
+//       case 'status_change':
+//         return Icons.timeline;
+//       case 'section_checkin':
+//         return Icons.login;
+//       case 'section_checkout':
+//         return Icons.logout;
+//       default:
+//         return Icons.notifications;
+//     }
+//   }
+
+//   Color _getNotificationColor(String type) {
+//     switch (type) {
+//       case 'approval_request':
+//         return Colors.blue;
+//       case 'approval_update':
+//         return Colors.green;
+//       case 'status_change':
+//         return Colors.orange;
+//       case 'section_checkin':
+//         return Colors.purple;
+//       case 'section_checkout':
+//         return Colors.grey;
+//       default:
+//         return Colors.grey;
+//     }
+//   }
+
+//   void _handleNotificationTap(NotificationItem notification) {
+//     // Navigate based on notification type
+//     // You can implement navigation logic here
+//     print('Tapped: ${notification.title}');
+//   }
+
+//   void _showNotificationsDialog() {
+//     showModalBottomSheet(
+//       context: context,
+//       isScrollControlled: true,
+//       backgroundColor: Colors.transparent,
+//       builder: (context) => DraggableScrollableSheet(
+//         initialChildSize: 0.9,
+//         minChildSize: 0.5,
+//         maxChildSize: 0.95,
+//         builder: (_, scrollController) => Container(
+//           decoration: const BoxDecoration(
+//             color: Colors.white,
+//             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+//           ),
+//           child: Column(
+//             children: [
+//               // Header
+//               Container(
+//                 padding: const EdgeInsets.all(16),
+//                 decoration: BoxDecoration(
+//                   border: Border(
+//                     bottom: BorderSide(color: Colors.grey.shade200),
+//                   ),
+//                 ),
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     Row(
+//                       children: [
+//                         const Text(
+//                           'Notifications',
+//                           style: TextStyle(
+//                             fontSize: 20,
+//                             fontWeight: FontWeight.bold,
+//                           ),
+//                         ),
+//                         const SizedBox(width: 8),
+//                         if (_unreadCount > 0)
+//                           Container(
+//                             padding: const EdgeInsets.symmetric(
+//                               horizontal: 8,
+//                               vertical: 2,
+//                             ),
+//                             decoration: BoxDecoration(
+//                               color: Colors.red,
+//                               borderRadius: BorderRadius.circular(12),
+//                             ),
+//                             child: Text(
+//                               '$_unreadCount',
+//                               style: const TextStyle(
+//                                 color: Colors.white,
+//                                 fontSize: 12,
+//                                 fontWeight: FontWeight.bold,
+//                               ),
+//                             ),
+//                           ),
+//                       ],
+//                     ),
+//                     if (_unreadCount > 0)
+//                       TextButton(
+//                         onPressed: _markAllAsRead,
+//                         child: const Text('Mark all as read'),
+//                       ),
+//                   ],
+//                 ),
+//               ),
+
+//               // Notification List
+//               Expanded(
+//                 child: _loadingNotifications
+//                     ? const Center(child: CircularProgressIndicator())
+//                     : RefreshIndicator(
+//                         onRefresh: _fetchExistingNotifications,
+//                         child: ListView(
+//                           controller: scrollController,
+//                           children: [
+//                             // Real-time notifications section
+//                             if (_realtimeNotifications.isNotEmpty)
+//                               Column(
+//                                 crossAxisAlignment: CrossAxisAlignment.start,
+//                                 children: [
+//                                   Padding(
+//                                     padding: const EdgeInsets.all(12),
+//                                     child: Row(
+//                                       children: [
+//                                         Container(
+//                                           width: 8,
+//                                           height: 8,
+//                                           decoration: const BoxDecoration(
+//                                             color: Colors.green,
+//                                             shape: BoxShape.circle,
+//                                           ),
+//                                         ),
+//                                         const SizedBox(width: 8),
+//                                         const Text(
+//                                           'Live Updates',
+//                                           style: TextStyle(
+//                                             fontSize: 12,
+//                                             fontWeight: FontWeight.w600,
+//                                             color: Colors.green,
+//                                           ),
+//                                         ),
+//                                       ],
+//                                     ),
+//                                   ),
+//                                   ..._realtimeNotifications
+//                                       .asMap()
+//                                       .entries
+//                                       .map((entry) {
+//                                     int idx = entry.key;
+//                                     NotificationItem notification = entry.value;
+//                                     return _NotificationTile(
+//                                       notification: notification,
+//                                       icon: _getNotificationIcon(
+//                                           notification.type),
+//                                       color: _getNotificationColor(
+//                                           notification.type),
+//                                       onTap: () =>
+//                                           _handleNotificationTap(notification),
+//                                       onMarkRead: () => _markAsRead(
+//                                           notification.id, true, idx),
+//                                     );
+//                                   }),
+//                                   const Divider(),
+//                                 ],
+//                               ),
+
+//                             // Existing notifications section
+//                             if (_existingNotifications.isNotEmpty)
+//                               Column(
+//                                 crossAxisAlignment: CrossAxisAlignment.start,
+//                                 children: [
+//                                   Padding(
+//                                     padding: const EdgeInsets.all(12),
+//                                     child: Row(
+//                                       children: [
+//                                         Container(
+//                                           width: 8,
+//                                           height: 8,
+//                                           decoration: const BoxDecoration(
+//                                             color: Colors.blue,
+//                                             shape: BoxShape.circle,
+//                                           ),
+//                                         ),
+//                                         const SizedBox(width: 8),
+//                                         const Text(
+//                                           'Previous Notifications',
+//                                           style: TextStyle(
+//                                             fontSize: 12,
+//                                             fontWeight: FontWeight.w600,
+//                                             color: Colors.blue,
+//                                           ),
+//                                         ),
+//                                       ],
+//                                     ),
+//                                   ),
+//                                   ..._existingNotifications
+//                                       .asMap()
+//                                       .entries
+//                                       .map((entry) {
+//                                     int idx = entry.key;
+//                                     NotificationItem notification = entry.value;
+//                                     return _NotificationTile(
+//                                       notification: notification,
+//                                       icon: _getNotificationIcon(
+//                                           notification.type),
+//                                       color: _getNotificationColor(
+//                                           notification.type),
+//                                       onTap: () =>
+//                                           _handleNotificationTap(notification),
+//                                       onMarkRead: () => _markAsRead(
+//                                           notification.id, false, idx),
+//                                     );
+//                                   }),
+//                                 ],
+//                               ),
+
+//                             if (_existingNotifications.isEmpty &&
+//                                 _realtimeNotifications.isEmpty)
+//                               const Padding(
+//                                 padding: EdgeInsets.all(32),
+//                                 child: Center(
+//                                   child: Column(
+//                                     children: [
+//                                       Icon(Icons.notifications_none,
+//                                           size: 64, color: Colors.grey),
+//                                       SizedBox(height: 16),
+//                                       Text(
+//                                         'No notifications',
+//                                         style: TextStyle(color: Colors.grey),
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ),
+//                           ],
+//                         ),
+//                       ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   Future<void> _fetchDashboardCounts() async {
+//     if (!mounted) return;
+
+//     setState(() {
+//       _isLoading = true;
+//       _errorMessage = null;
+//     });
+
+//     try {
+//       final token = await ApiService.getAccessToken();
+//       print('Token exists: ${token != null}');
+
+//       if (token == null) {
+//         print('No token found, waiting for login...');
+//         setState(() {
+//           _errorMessage = 'Please login to view dashboard';
+//           _isLoading = false;
+//         });
+//         return;
+//       }
+
+//       final response = await ApiService.getDashboardCounts();
+
+//       setState(() {
+//         _pendingApprovals = response['pending_approvals'] ?? 0;
+//         _lateVisitors = response['checkin_summary']?['late'] ?? 0;
+//         _scheduledToday = response['scheduled_today'] ?? 0;
+//         _isLoading = false;
+//       });
+
+//       print(
+//           'Dashboard data loaded: pending=$_pendingApprovals, late=$_lateVisitors, scheduled=$_scheduledToday');
+//     } catch (e) {
+//       print('Error fetching dashboard counts: $e');
+//       setState(() {
+//         _errorMessage = e.toString();
+//         _pendingApprovals = 0;
+//         _lateVisitors = 0;
+//         _scheduledToday = 0;
+//         _isLoading = false;
+//       });
+//     }
+//   }
+
+//   String _formattedDate() {
+//     final now = DateTime.now();
+//     return "${now.day}/${now.month}/${now.year}";
+//   }
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -382,43 +1601,79 @@
 //         ),
 //         centerTitle: true,
 //         elevation: 0,
+//         actions: [
+//           // Notification Bell with Badge
+//           Stack(
+//             children: [
+//               IconButton(
+//                 icon: const Icon(Icons.notifications_none, color: Colors.white),
+//                 onPressed: _showNotificationsDialog,
+//                 tooltip: 'Notifications',
+//               ),
+//               if (_unreadCount > 0)
+//                 Positioned(
+//                   right: 8,
+//                   top: 8,
+//                   child: Container(
+//                     padding: const EdgeInsets.all(2),
+//                     decoration: BoxDecoration(
+//                       color: Colors.red,
+//                       borderRadius: BorderRadius.circular(10),
+//                     ),
+//                     constraints: const BoxConstraints(
+//                       minWidth: 16,
+//                       minHeight: 16,
+//                     ),
+//                     child: Text(
+//                       '$_unreadCount',
+//                       style: const TextStyle(
+//                         color: Colors.white,
+//                         fontSize: 10,
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                       textAlign: TextAlign.center,
+//                     ),
+//                   ),
+//                 ),
+//             ],
+//           ),
+//           IconButton(
+//             icon: const Icon(Icons.refresh, color: Colors.white),
+//             onPressed: _fetchDashboardCounts,
+//             tooltip: 'Refresh',
+//           ),
+//         ],
 //       ),
 //       body: SafeArea(
-//         child: Padding(
-//           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+//         child: SingleChildScrollView(
+//           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
 //           child: Column(
 //             crossAxisAlignment: CrossAxisAlignment.start,
 //             children: [
-//               // Header
+//               // Header row
 //               Row(
 //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                 children: [
 //                   const Text(
 //                     "Dashboard Overview",
 //                     style: TextStyle(
-//                       fontSize: 20,
+//                       fontSize: 18,
 //                       fontWeight: FontWeight.w700,
 //                       color: Colors.black87,
 //                     ),
 //                   ),
 //                   Container(
 //                     padding:
-//                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+//                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
 //                     decoration: BoxDecoration(
 //                       color: Colors.white,
 //                       borderRadius: BorderRadius.circular(20),
-//                       boxShadow: [
-//                         BoxShadow(
-//                           color: Colors.grey.withOpacity(0.1),
-//                           blurRadius: 4,
-//                           offset: const Offset(0, 2),
-//                         ),
-//                       ],
+//                       border: Border.all(color: Colors.grey.shade200),
 //                     ),
 //                     child: Text(
 //                       "Today, ${_formattedDate()}",
 //                       style: TextStyle(
-//                         fontSize: 12,
+//                         fontSize: 11,
 //                         color: Colors.grey[600],
 //                         fontWeight: FontWeight.w500,
 //                       ),
@@ -426,104 +1681,219 @@
 //                   ),
 //                 ],
 //               ),
-//               const SizedBox(height: 20),
+//               const SizedBox(height: 16),
 
-//               // Enhanced Stats Cards - Using GridView with better proportions
-//               GridView.count(
-//                 shrinkWrap: true,
-//                 crossAxisCount: 3,
-//                 crossAxisSpacing: 16,
-//                 mainAxisSpacing: 16,
-//                 childAspectRatio: 1.1, // Changed to make cards taller
-//                 physics: const NeverScrollableScrollPhysics(),
-//                 children: const [
-//                   _EnhancedStatCard(
-//                     title: "Total Employees",
-//                     value: "120",
-//                     color: Color(0xFF3B82F6),
-//                     icon: Icons.people,
-//                     subtitle: "Active staff members",
-//                     trend: "+12 this month",
-//                     trendUp: true,
-//                   ),
-//                   _EnhancedStatCard(
-//                     title: "Total Visitors",
-//                     value: "45",
-//                     color: Color(0xFFF59E0B),
-//                     icon: Icons.group,
-//                     subtitle: "Today's check-ins",
-//                     trend: "+8 since yesterday",
-//                     trendUp: true,
-//                   ),
-//                   _EnhancedStatCard(
-//                     title: "Active Now",
-//                     value: "18",
-//                     color: Color(0xFF10B981),
-//                     icon: Icons.flash_on,
-//                     subtitle: "Currently on site",
-//                     trend: "Peak hour: 2-3 PM",
-//                     trendUp: true,
-//                   ),
-//                 ],
-//               ),
-//               const SizedBox(height: 24),
-
-//               // Activity Section
-//               Expanded(
-//                 child: Container(
-//                   padding: const EdgeInsets.all(16),
+//               // Error message if any
+//               if (_errorMessage != null)
+//                 Container(
+//                   padding: const EdgeInsets.all(12),
+//                   margin: const EdgeInsets.only(bottom: 16),
 //                   decoration: BoxDecoration(
-//                     color: Colors.white,
-//                     borderRadius: BorderRadius.circular(16),
-//                     boxShadow: [
-//                       BoxShadow(
-//                         color: Colors.grey.withOpacity(0.08),
-//                         blurRadius: 8,
-//                         offset: const Offset(0, 2),
+//                     color: Colors.red.shade50,
+//                     borderRadius: BorderRadius.circular(12),
+//                     border: Border.all(color: Colors.red.shade200),
+//                   ),
+//                   child: Row(
+//                     children: [
+//                       Icon(Icons.error_outline,
+//                           color: Colors.red.shade700, size: 20),
+//                       const SizedBox(width: 12),
+//                       Expanded(
+//                         child: Text(
+//                           _errorMessage!,
+//                           style: TextStyle(
+//                               color: Colors.red.shade700, fontSize: 12),
+//                         ),
+//                       ),
+//                       TextButton(
+//                         onPressed: _fetchDashboardCounts,
+//                         child: const Text('Retry'),
 //                       ),
 //                     ],
 //                   ),
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Row(
+//                 ),
+
+//               // Three dashboard cards
+//               IntrinsicHeight(
+//                 child: Row(
+//                   crossAxisAlignment: CrossAxisAlignment.stretch,
+//                   children: [
+//                     Expanded(
+//                       child: GestureDetector(
+//                         onTap: () {
+//                           if (_pendingApprovals > 0) {
+//                             Navigator.push(
+//                               context,
+//                               MaterialPageRoute(
+//                                 builder: (context) =>
+//                                     const PendingApprovalsPage(),
+//                               ),
+//                             );
+//                           }
+//                         },
+//                         // child: _StatCard(
+//                         //   title: "Pending\nApprovals",
+//                         //   value:
+//                         //       _isLoading ? "..." : _pendingApprovals.toString(),
+//                         //   color: const Color(0xFF8B5CF6),
+//                         //   icon: Icons.assignment_turned_in,
+//                         //   trend: _pendingApprovals > 0
+//                         //       ? "Action needed"
+//                         //       : "All clear",
+//                         //   trendLabel: _pendingApprovals > 0
+//                         //       ? "$_pendingApprovals visitor(s) need approval"
+//                         //       : "No pending approvals",
+//                         // ),
+//                         child: _StatCard(
+//                           title: "Pending\nApprovals",
+//                           value:
+//                               _isLoading ? "..." : _pendingApprovals.toString(),
+//                           color: const Color(0xFF8B5CF6),
+//                           icon: Icons.assignment_turned_in,
+//                           trend: _pendingApprovals > 0
+//                               ? "Action needed"
+//                               : "All clear",
+//                           trendLabel: _pendingApprovals > 0
+//                               ? "$_pendingApprovals visitor(s) need approval"
+//                               : "No pending approvals",
+//                         ),
+//                       ),
+//                     ),
+//                     const SizedBox(width: 10),
+//                     Expanded(
+//                       child: _StatCard(
+//                         title: "Late\nVisitors",
+//                         value: _isLoading ? "..." : _lateVisitors.toString(),
+//                         color: const Color(0xFFEF4444),
+//                         icon: Icons.warning_amber_rounded,
+//                         trend: _lateVisitors > 0 ? "Alert" : "On time",
+//                         trendLabel: _lateVisitors > 0
+//                             ? "$_lateVisitors visitor(s) arrived late"
+//                             : "All visitors on time",
+//                       ),
+//                     ),
+//                     const SizedBox(width: 10),
+//                     Expanded(
+//                       child: _StatCard(
+//                         title: "Scheduled\nToday",
+//                         value: _isLoading ? "..." : _scheduledToday.toString(),
+//                         color: const Color(0xFF10B981),
+//                         icon: Icons.calendar_today,
+//                         trend: _scheduledToday > 0 ? "Upcoming" : "No visits",
+//                         trendLabel: _scheduledToday > 0
+//                             ? "$_scheduledToday visitor(s) scheduled"
+//                             : "No visits scheduled today",
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//               const SizedBox(height: 16),
+
+//               // Recent Activity / Notifications Section
+//               Container(
+//                 decoration: BoxDecoration(
+//                   color: Colors.white,
+//                   borderRadius: BorderRadius.circular(16),
+//                   border: Border.all(color: Colors.grey.shade100),
+//                 ),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Padding(
+//                       padding: const EdgeInsets.fromLTRB(14, 14, 14, 8),
+//                       child: Row(
 //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                         children: [
 //                           const Text(
 //                             "Recent Activity",
 //                             style: TextStyle(
 //                               fontWeight: FontWeight.w700,
-//                               fontSize: 16,
+//                               fontSize: 15,
 //                               color: Colors.black87,
 //                             ),
 //                           ),
-//                           TextButton(
-//                             onPressed: () {},
-//                             child: const Text(
-//                               "View All",
-//                               style: TextStyle(fontSize: 12),
+//                           GestureDetector(
+//                             onTap: _showNotificationsDialog,
+//                             child: Container(
+//                               padding: const EdgeInsets.symmetric(
+//                                 horizontal: 10,
+//                                 vertical: 4,
+//                               ),
+//                               decoration: BoxDecoration(
+//                                 color: Colors.blue.shade50,
+//                                 borderRadius: BorderRadius.circular(12),
+//                               ),
+//                               child: Row(
+//                                 children: [
+//                                   Icon(Icons.list_alt,
+//                                       size: 14, color: Colors.blue.shade700),
+//                                   const SizedBox(width: 4),
+//                                   Text(
+//                                     'View All',
+//                                     style: TextStyle(
+//                                       fontSize: 12,
+//                                       color: Colors.blue.shade700,
+//                                       fontWeight: FontWeight.w500,
+//                                     ),
+//                                   ),
+//                                 ],
+//                               ),
 //                             ),
 //                           ),
 //                         ],
 //                       ),
-//                       const SizedBox(height: 12),
-//                       Expanded(
-//                         child: ListView.builder(
-//                           itemCount: 5,
-//                           itemBuilder: (context, index) {
-//                             const items = [
-//                               "Visitor John checked in",
-//                               "Employee added",
-//                               "Visitor Jane checked out",
-//                               "Security alert triggered",
-//                               "Visitor Alex checked in",
-//                             ];
-//                             return _EnhancedActivityTile(items[index]);
-//                           },
+//                     ),
+
+//                     // Show recent notifications (last 3)
+//                     if (_realtimeNotifications.isNotEmpty ||
+//                         _existingNotifications.isNotEmpty)
+//                       Column(
+//                         children: [
+//                           // Show real-time notifications first
+//                           ...(_realtimeNotifications
+//                               .take(3)
+//                               .map((notification) => _RecentNotificationTile(
+//                                     notification: notification,
+//                                     icon:
+//                                         _getNotificationIcon(notification.type),
+//                                     color: _getNotificationColor(
+//                                         notification.type),
+//                                     isRealTime: true,
+//                                   ))),
+
+//                           // Then show existing notifications
+//                           ...(_existingNotifications
+//                               .take(3 - _realtimeNotifications.length)
+//                               .map((notification) => _RecentNotificationTile(
+//                                     notification: notification,
+//                                     icon:
+//                                         _getNotificationIcon(notification.type),
+//                                     color: _getNotificationColor(
+//                                         notification.type),
+//                                     isRealTime: false,
+//                                   ))),
+//                         ],
+//                       )
+//                     else
+//                       const Padding(
+//                         padding: EdgeInsets.all(32.0),
+//                         child: Center(
+//                           child: Column(
+//                             children: [
+//                               Icon(Icons.notifications_none,
+//                                   size: 48, color: Colors.grey),
+//                               SizedBox(height: 12),
+//                               Text(
+//                                 "No recent activity",
+//                                 style: TextStyle(color: Colors.grey),
+//                               ),
+//                             ],
+//                           ),
 //                         ),
 //                       ),
-//                     ],
-//                   ),
+//                     const SizedBox(height: 6),
+//                   ],
 //                 ),
 //               ),
 //             ],
@@ -532,102 +1902,364 @@
 //       ),
 //     );
 //   }
+// }
 
-//   String _formattedDate() {
-//     final now = DateTime.now();
-//     return "${now.day}/${now.month}/${now.year}";
+// // // Notification Item Model
+// class NotificationItem {
+//   final int id;
+//   final String type;
+//   final String title;
+//   final String message;
+//   final DateTime createdAt;
+//   bool isRead;
+//   final Map<String, dynamic>? data;
+
+//   NotificationItem({
+//     required this.id,
+//     required this.type,
+//     required this.title,
+//     required this.message,
+//     required this.createdAt,
+//     required this.isRead,
+//     this.data,
+//   });
+
+//   factory NotificationItem.fromApi(Map<String, dynamic> json) {
+//     return NotificationItem(
+//       id: json['id'],
+//       type: json['type'] ?? 'notification',
+//       title: json['title'],
+//       message: json['message'],
+//       createdAt: DateTime.parse(json['created_at']),
+//       isRead: json['is_read'] ?? false,
+//       data: json['data'],
+//     );
+//   }
+
+//   // factory NotificationItem.fromWebSocket(Map<String, dynamic> data) {
+//   //   final notificationData = data['data'] as Map<String, dynamic>;
+//   //   return NotificationItem(
+//   //     id: notificationData['id'] ?? DateTime.now().millisecondsSinceEpoch,
+//   //     type: data['type'] ?? notificationData['type'] ?? 'notification',
+//   //     title: notificationData['title'] ?? 'New Notification',
+//   //     message: notificationData['message'] ?? 'You have a new notification',
+//   //     createdAt: DateTime.now(),
+//   //     isRead: false,
+//   //     data: notificationData,
+//   //   );
+//   // }
+
+//   factory NotificationItem.fromWebSocket(Map<String, dynamic> data) {
+//     // Check if the notification is nested in a 'data' field
+//     final notificationData =
+//         data.containsKey('data') && data['data'] is Map<String, dynamic>
+//             ? data['data'] as Map<String, dynamic>
+//             : data;
+
+//     return NotificationItem(
+//       id: notificationData['id'] ?? DateTime.now().millisecondsSinceEpoch,
+//       type: notificationData['type'] ?? data['type'] ?? 'notification',
+//       title: notificationData['title'] ?? 'New Notification',
+//       message: notificationData['message'] ?? 'You have a new notification',
+//       createdAt: DateTime.now(),
+//       isRead: false,
+//       data: notificationData,
+//     );
+//   }
+//   bool get isUrgent {
+//     return type == 'approval_request' ||
+//         type == 'approval_update' ||
+//         type == 'status_change';
 //   }
 // }
 
-// // Enhanced Stat Card with more content
-// class _EnhancedStatCard extends StatelessWidget {
-//   final String title;
-//   final String value;
-//   final Color color;
+// // Notification Tile for Dialog
+// class _NotificationTile extends StatelessWidget {
+//   final NotificationItem notification;
 //   final IconData icon;
-//   final String subtitle;
-//   final String trend;
-//   final bool trendUp;
+//   final Color color;
+//   final VoidCallback onTap;
+//   final VoidCallback onMarkRead;
 
-//   const _EnhancedStatCard({
-//     required this.title,
-//     required this.value,
-//     required this.color,
+//   const _NotificationTile({
+//     required this.notification,
 //     required this.icon,
-//     required this.subtitle,
-//     required this.trend,
-//     required this.trendUp,
+//     required this.color,
+//     required this.onTap,
+//     required this.onMarkRead,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return InkWell(
+//       onTap: onTap,
+//       child: Container(
+//         padding: const EdgeInsets.all(12),
+//         decoration: BoxDecoration(
+//           border: Border(
+//             bottom: BorderSide(color: Colors.grey.shade100),
+//           ),
+//         ),
+//         child: Row(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Container(
+//               padding: const EdgeInsets.all(8),
+//               decoration: BoxDecoration(
+//                 color: color.withOpacity(0.1),
+//                 borderRadius: BorderRadius.circular(8),
+//               ),
+//               child: Icon(icon, color: color, size: 20),
+//             ),
+//             const SizedBox(width: 12),
+//             Expanded(
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Row(
+//                     children: [
+//                       Expanded(
+//                         child: Text(
+//                           notification.title,
+//                           style: TextStyle(
+//                             fontWeight: notification.isRead
+//                                 ? FontWeight.normal
+//                                 : FontWeight.bold,
+//                             fontSize: 14,
+//                           ),
+//                         ),
+//                       ),
+//                       if (!notification.isRead)
+//                         Container(
+//                           width: 8,
+//                           height: 8,
+//                           decoration: const BoxDecoration(
+//                             color: Colors.blue,
+//                             shape: BoxShape.circle,
+//                           ),
+//                         ),
+//                     ],
+//                   ),
+//                   const SizedBox(height: 4),
+//                   Text(
+//                     notification.message,
+//                     style: TextStyle(
+//                       fontSize: 12,
+//                       color: Colors.grey[600],
+//                     ),
+//                     maxLines: 2,
+//                     overflow: TextOverflow.ellipsis,
+//                   ),
+//                   const SizedBox(height: 4),
+//                   Text(
+//                     _formatTime(notification.createdAt),
+//                     style: TextStyle(
+//                       fontSize: 10,
+//                       color: Colors.grey[400],
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             if (!notification.isRead)
+//               IconButton(
+//                 icon: const Icon(Icons.done_all, size: 18),
+//                 onPressed: onMarkRead,
+//                 tooltip: 'Mark as read',
+//               ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   String _formatTime(DateTime time) {
+//     final now = DateTime.now();
+//     final difference = now.difference(time);
+
+//     if (difference.inDays > 0) {
+//       return '${difference.inDays}d ago';
+//     } else if (difference.inHours > 0) {
+//       return '${difference.inHours}h ago';
+//     } else if (difference.inMinutes > 0) {
+//       return '${difference.inMinutes}m ago';
+//     } else {
+//       return 'Just now';
+//     }
+//   }
+// }
+
+// // Recent Notification Tile for Dashboard
+// class _RecentNotificationTile extends StatelessWidget {
+//   final NotificationItem notification;
+//   final IconData icon;
+//   final Color color;
+//   final bool isRealTime;
+
+//   const _RecentNotificationTile({
+//     required this.notification,
+//     required this.icon,
+//     required this.color,
+//     required this.isRealTime,
 //   });
 
 //   @override
 //   Widget build(BuildContext context) {
 //     return Container(
-//       padding: const EdgeInsets.all(14),
+//       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
 //       decoration: BoxDecoration(
-//         gradient: LinearGradient(
-//           begin: Alignment.topLeft,
-//           end: Alignment.bottomRight,
-//           colors: [
-//             color.withOpacity(0.12),
-//             color.withOpacity(0.06),
-//           ],
+//         border: Border(
+//           top: BorderSide(color: Colors.grey.shade100),
 //         ),
-//         borderRadius: BorderRadius.circular(16),
-//         border: Border.all(
-//           color: color.withOpacity(0.2),
-//           width: 1,
-//         ),
+//       ),
+//       child: Row(
+//         children: [
+//           Container(
+//             padding: const EdgeInsets.all(6),
+//             decoration: BoxDecoration(
+//               color: color.withOpacity(0.1),
+//               borderRadius: BorderRadius.circular(8),
+//             ),
+//             child: Icon(icon, color: color, size: 16),
+//           ),
+//           const SizedBox(width: 12),
+//           Expanded(
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Row(
+//                   children: [
+//                     Expanded(
+//                       child: Text(
+//                         notification.title,
+//                         style: const TextStyle(
+//                           fontWeight: FontWeight.w600,
+//                           fontSize: 13,
+//                         ),
+//                         maxLines: 1,
+//                         overflow: TextOverflow.ellipsis,
+//                       ),
+//                     ),
+//                     if (isRealTime)
+//                       Container(
+//                         padding: const EdgeInsets.symmetric(
+//                             horizontal: 4, vertical: 2),
+//                         decoration: BoxDecoration(
+//                           color: Colors.green.shade100,
+//                           borderRadius: BorderRadius.circular(4),
+//                         ),
+//                         child: const Text(
+//                           'LIVE',
+//                           style: TextStyle(
+//                             fontSize: 8,
+//                             fontWeight: FontWeight.bold,
+//                             color: Colors.green,
+//                           ),
+//                         ),
+//                       ),
+//                   ],
+//                 ),
+//                 const SizedBox(height: 2),
+//                 Text(
+//                   notification.message,
+//                   style: TextStyle(
+//                     fontSize: 11,
+//                     color: Colors.grey[600],
+//                   ),
+//                   maxLines: 1,
+//                   overflow: TextOverflow.ellipsis,
+//                 ),
+//               ],
+//             ),
+//           ),
+//           const SizedBox(width: 8),
+//           Icon(Icons.chevron_right, size: 16, color: Colors.grey[400]),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// // Stat Card Widget (keep as is)
+// class _StatCard extends StatelessWidget {
+//   final String title;
+//   final String value;
+//   final Color color;
+//   final IconData icon;
+//   final String trend;
+//   final String trendLabel;
+
+//   const _StatCard({
+//     required this.title,
+//     required this.value,
+//     required this.color,
+//     required this.icon,
+//     required this.trend,
+//     required this.trendLabel,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.all(12),
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         borderRadius: BorderRadius.circular(14),
+//         border: Border.all(color: Colors.grey.shade100),
+//         boxShadow: [
+//           BoxShadow(
+//             color: Colors.grey.withOpacity(0.05),
+//             blurRadius: 4,
+//             offset: const Offset(0, 2),
+//           ),
+//         ],
 //       ),
 //       child: Column(
 //         crossAxisAlignment: CrossAxisAlignment.start,
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         mainAxisSize: MainAxisSize.min,
 //         children: [
 //           Row(
 //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //             children: [
 //               Container(
-//                 padding: const EdgeInsets.all(8),
+//                 width: 34,
+//                 height: 34,
 //                 decoration: BoxDecoration(
-//                   color: color.withOpacity(0.15),
-//                   borderRadius: BorderRadius.circular(12),
+//                   color: color.withOpacity(0.12),
+//                   borderRadius: BorderRadius.circular(10),
 //                 ),
-//                 child: Icon(icon, color: color, size: 22),
+//                 child: Icon(icon, color: color, size: 18),
 //               ),
 //               Container(
-//                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+//                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
 //                 decoration: BoxDecoration(
-//                   color: trendUp
-//                       ? Colors.green.withOpacity(0.1)
-//                       : Colors.red.withOpacity(0.1),
-//                   borderRadius: BorderRadius.circular(8),
+//                   color: trend == "Alert" || trend == "Action needed"
+//                       ? Colors.orange.shade50
+//                       : (trend == "All clear" || trend == "On time"
+//                           ? Colors.green.shade50
+//                           : Colors.blue.shade50),
+//                   borderRadius: BorderRadius.circular(6),
 //                 ),
-//                 child: Row(
-//                   mainAxisSize: MainAxisSize.min,
-//                   children: [
-//                     Icon(
-//                       trendUp ? Icons.trending_up : Icons.trending_down,
-//                       size: 12,
-//                       color: trendUp ? Colors.green : Colors.red,
-//                     ),
-//                     const SizedBox(width: 2),
-//                     Text(
-//                       trend.split(' ').first,
-//                       style: TextStyle(
-//                         fontSize: 9,
-//                         fontWeight: FontWeight.w600,
-//                         color: trendUp ? Colors.green : Colors.red,
-//                       ),
-//                     ),
-//                   ],
+//                 child: Text(
+//                   trend,
+//                   style: TextStyle(
+//                     fontSize: 9,
+//                     fontWeight: FontWeight.w600,
+//                     color: trend == "Alert" || trend == "Action needed"
+//                         ? Colors.orange.shade700
+//                         : (trend == "All clear" || trend == "On time"
+//                             ? Colors.green.shade700
+//                             : Colors.blue.shade700),
+//                   ),
 //                 ),
 //               ),
 //             ],
 //           ),
-//           const SizedBox(height: 12),
+//           const SizedBox(height: 10),
 //           Text(
 //             value,
 //             style: TextStyle(
-//               fontSize: 28,
+//               fontSize: 26,
 //               fontWeight: FontWeight.bold,
 //               color: color,
 //               height: 1,
@@ -637,155 +2269,28 @@
 //           Text(
 //             title,
 //             style: const TextStyle(
-//               fontSize: 13,
+//               fontSize: 11,
 //               fontWeight: FontWeight.w600,
 //               color: Colors.black87,
-//             ),
-//           ),
-//           const SizedBox(height: 2),
-//           Text(
-//             subtitle,
-//             style: TextStyle(
-//               fontSize: 9,
-//               color: Colors.grey[500],
+//               height: 1.3,
 //             ),
 //           ),
 //           const SizedBox(height: 6),
 //           Container(
-//             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+//             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
 //             decoration: BoxDecoration(
 //               color: color.withOpacity(0.08),
-//               borderRadius: BorderRadius.circular(6),
+//               borderRadius: BorderRadius.circular(5),
 //             ),
 //             child: Text(
-//               trend,
+//               trendLabel,
 //               style: TextStyle(
 //                 fontSize: 8,
 //                 color: color,
 //                 fontWeight: FontWeight.w500,
 //               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// // Enhanced Activity Tile with better spacing and info
-// class _EnhancedActivityTile extends StatelessWidget {
-//   final String text;
-//   const _EnhancedActivityTile(this.text);
-
-//   IconData get _icon {
-//     if (text.contains("checked in")) return Icons.login;
-//     if (text.contains("checked out")) return Icons.logout;
-//     if (text.contains("added")) return Icons.person_add;
-//     if (text.contains("alert")) return Icons.warning_amber_rounded;
-//     return Icons.info_outline;
-//   }
-
-//   Color get _color {
-//     if (text.contains("checked in")) return Colors.green;
-//     if (text.contains("checked out")) return Colors.orange;
-//     if (text.contains("added")) return Colors.blue;
-//     if (text.contains("alert")) return Colors.red;
-//     return Colors.grey;
-//   }
-
-//   String get _time {
-//     if (text.contains("John")) return "09:14 AM";
-//     if (text.contains("added")) return "09:02 AM";
-//     if (text.contains("Jane")) return "08:55 AM";
-//     if (text.contains("alert")) return "08:40 AM";
-//     if (text.contains("Alex")) return "08:30 AM";
-//     return "Recently";
-//   }
-
-//   String get _location {
-//     if (text.contains("John")) return "Main Entrance";
-//     if (text.contains("added")) return "HR Department";
-//     if (text.contains("Jane")) return "West Wing";
-//     if (text.contains("alert")) return "Security Office";
-//     if (text.contains("Alex")) return "North Entrance";
-//     return "Unknown";
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 8),
-//       child: Row(
-//         children: [
-//           Container(
-//             width: 40,
-//             height: 40,
-//             decoration: BoxDecoration(
-//               gradient: LinearGradient(
-//                 begin: Alignment.topLeft,
-//                 end: Alignment.bottomRight,
-//                 colors: [
-//                   _color.withOpacity(0.15),
-//                   _color.withOpacity(0.05),
-//                 ],
-//               ),
-//               borderRadius: BorderRadius.circular(12),
-//             ),
-//             child: Icon(_icon, size: 20, color: _color),
-//           ),
-//           const SizedBox(width: 12),
-//           Expanded(
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text(
-//                   text,
-//                   style: const TextStyle(
-//                     fontSize: 13,
-//                     fontWeight: FontWeight.w600,
-//                     color: Colors.black87,
-//                   ),
-//                   overflow: TextOverflow.ellipsis,
-//                 ),
-//                 const SizedBox(height: 4),
-//                 Row(
-//                   children: [
-//                     Icon(Icons.access_time, size: 10, color: Colors.grey[400]),
-//                     const SizedBox(width: 4),
-//                     Text(
-//                       _time,
-//                       style: TextStyle(
-//                         fontSize: 10,
-//                         color: Colors.grey[500],
-//                       ),
-//                     ),
-//                     const SizedBox(width: 8),
-//                     Icon(Icons.location_on, size: 10, color: Colors.grey[400]),
-//                     const SizedBox(width: 4),
-//                     Text(
-//                       _location,
-//                       style: TextStyle(
-//                         fontSize: 10,
-//                         color: Colors.grey[500],
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ),
-//           Container(
-//             width: 8,
-//             height: 8,
-//             decoration: BoxDecoration(
-//               color: _color,
-//               shape: BoxShape.circle,
-//               boxShadow: [
-//                 BoxShadow(
-//                   color: _color.withOpacity(0.4),
-//                   blurRadius: 4,
-//                 ),
-//               ],
+//               maxLines: 2,
+//               overflow: TextOverflow.ellipsis,
 //             ),
 //           ),
 //         ],
@@ -795,8 +2300,14 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:modernlogintute/pages/pending_approvals_page.dart';
 import 'package:modernlogintute/pages/profile_page.dart';
 import 'package:modernlogintute/pages/visitor_list_page.dart';
+import 'package:modernlogintute/services/api_services.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:web_socket_channel/io.dart';
+import 'dart:convert';
+import 'dart:html' as html;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -807,6 +2318,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+  Map<String, dynamic>? _currentEmployee;
+  bool _isLoadingEmployee = true;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Widget> _pages = [
     const DashboardContent(),
@@ -814,15 +2328,74 @@ class _HomePageState extends State<HomePage> {
     const ProfilePage(),
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    _fetchCurrentEmployee();
+  }
+
+  Future<void> _fetchCurrentEmployee() async {
+    try {
+      final employee = await ApiService.getCurrentEmployee();
+      setState(() {
+        _currentEmployee = employee;
+        _isLoadingEmployee = false;
+      });
+    } catch (e) {
+      print('Error fetching employee: $e');
+      setState(() {
+        _isLoadingEmployee = false;
+      });
+    }
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
 
+  void _openDrawer() {
+    _scaffoldKey.currentState?.openDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Check if current page is home page (index 0)
+    final bool isHomePage = _currentIndex == 0;
+
     return Scaffold(
+      key: _scaffoldKey,
+      // Only show app bar on home page
+      appBar: isHomePage
+          ? AppBar(
+              backgroundColor: Colors.black,
+              title: const Text(
+                "Visitor Management",
+                style:
+                    TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+              ),
+              centerTitle: true,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(Icons.menu, color: Colors.white),
+                onPressed: _openDrawer,
+              ),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.refresh, color: Colors.white),
+                  onPressed: () {
+                    _fetchCurrentEmployee();
+                    if (_pages[_currentIndex] is DashboardContent) {
+                      // Trigger dashboard refresh
+                      setState(() {});
+                    }
+                  },
+                  tooltip: 'Refresh',
+                ),
+              ],
+            )
+          : null, // No app bar for other pages (they have their own)
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
@@ -837,12 +2410,1865 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
+      // Only show drawer on home page
+      drawer: isHomePage ? _buildDrawer() : null,
+    );
+  }
+
+  // ... rest of your methods remain the same (_buildDrawer, _buildProfileSection,
+  // _buildProfilePhoto, _buildInitialsAvatar, _buildDrawerItem, _openReportsPage,
+  // _openGenerateIDCardPage, _logout)
+
+  Widget _buildDrawer() {
+    return Drawer(
+      child: Column(
+        children: [
+          // Profile Section - Takes appropriate space
+          _buildProfileSection(),
+
+          // Menu Items
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                const SizedBox(height: 8),
+                _buildDrawerItem(
+                  icon: Icons.assessment,
+                  title: 'Reports',
+                  subtitle: 'Export visitor reports',
+                  onTap: () {
+                    Navigator.pop(context);
+                    _openReportsPage();
+                  },
+                ),
+                _buildDrawerItem(
+                  icon: Icons.credit_card,
+                  title: 'Generate ID Card',
+                  subtitle: 'Create ID cards for visitors',
+                  onTap: () {
+                    Navigator.pop(context);
+                    _openGenerateIDCardPage();
+                  },
+                ),
+                const Divider(height: 32, thickness: 1),
+                _buildDrawerItem(
+                  icon: Icons.logout,
+                  title: 'Logout',
+                  subtitle: 'Sign out from your account',
+                  onTap: _logout,
+                  color: Colors.red,
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfileSection() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.blue.shade700, Colors.blue.shade900],
+        ),
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(24),
+          bottomRight: Radius.circular(24),
+        ),
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 25),
+          child: Column(
+            children: [
+              // Profile Avatar
+              Container(
+                width: 90,
+                height: 90,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 3),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 12,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: _buildProfilePhoto(),
+              ),
+              const SizedBox(height: 14),
+
+              // Name
+              Text(
+                _currentEmployee?['full_name'] ?? 'Loading...',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 6),
+
+              // Email
+              Text(
+                _currentEmployee?['email'] ?? '',
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.85),
+                  fontSize: 13,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+
+              // Department & Designation
+              if (_currentEmployee?['department'] != null ||
+                  _currentEmployee?['designation'] != null)
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    '${_currentEmployee?['department'] ?? ''}${_currentEmployee?['department'] != null && _currentEmployee?['designation'] != null ? ' • ' : ''}${_currentEmployee?['designation'] ?? ''}',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+
+              const SizedBox(height: 12),
+
+              // Employee ID Badge
+              if (_currentEmployee?['employee_code'] != null)
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    'ID: ${_currentEmployee?['employee_code']}',
+                    style: TextStyle(
+                      color: Colors.blue.shade700,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProfilePhoto() {
+    if (_isLoadingEmployee) {
+      return const Center(
+        child: CircularProgressIndicator(color: Colors.white),
+      );
+    }
+
+    final photoUrl = _currentEmployee?['profile_picture'];
+
+    if (photoUrl != null && photoUrl.isNotEmpty) {
+      return ClipOval(
+        child: Image.network(
+          photoUrl,
+          width: 90,
+          height: 90,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return _buildInitialsAvatar();
+          },
+        ),
+      );
+    } else {
+      return _buildInitialsAvatar();
+    }
+  }
+
+  Widget _buildInitialsAvatar() {
+    final name = _currentEmployee?['full_name'] ?? 'User';
+    final initials = name
+        .split(' ')
+        .map((part) => part.isNotEmpty ? part[0] : '')
+        .take(2)
+        .join()
+        .toUpperCase();
+
+    return Container(
+      width: 90,
+      height: 90,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.3),
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Text(
+          initials,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDrawerItem({
+    required IconData icon,
+    required String title,
+    String? subtitle,
+    required VoidCallback onTap,
+    Color color = Colors.black87,
+  }) {
+    return ListTile(
+      leading: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Icon(icon, color: color, size: 22),
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: color,
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      subtitle: subtitle != null
+          ? Text(
+              subtitle,
+              style: TextStyle(
+                color: Colors.grey.shade600,
+                fontSize: 12,
+              ),
+            )
+          : null,
+      trailing:
+          Icon(Icons.chevron_right, color: Colors.grey.shade400, size: 20),
+      onTap: onTap,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+    );
+  }
+
+  void _openReportsPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ReportsPage()),
+    );
+  }
+
+  void _openGenerateIDCardPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const GenerateIDCardPage()),
+    );
+  }
+
+  Future<void> _logout() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Logout'),
+        content: const Text('Are you sure you want to logout?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('Logout'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      await ApiService.logout();
+      if (mounted) {
+        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      }
+    }
+  }
+}
+
+// Keep all your other classes (ReportsPage, GenerateIDCardPage, DashboardContent,
+// NotificationItem, _NotificationTile, _RecentNotificationTile, _StatCard) as they are
+
+// class HomePage extends StatefulWidget {
+//   const HomePage({super.key});
+
+//   @override
+//   State<HomePage> createState() => _HomePageState();
+// }
+
+// class _HomePageState extends State<HomePage> {
+//   int _currentIndex = 0;
+//   Map<String, dynamic>? _currentEmployee;
+//   bool _isLoadingEmployee = true;
+//   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+//   final List<Widget> _pages = [
+//     const DashboardContent(),
+//     const VisitorsListPage(),
+//     const ProfilePage(),
+//   ];
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _fetchCurrentEmployee();
+//   }
+
+//   Future<void> _fetchCurrentEmployee() async {
+//     try {
+//       final employee = await ApiService.getCurrentEmployee();
+//       setState(() {
+//         _currentEmployee = employee;
+//         _isLoadingEmployee = false;
+//       });
+//     } catch (e) {
+//       print('Error fetching employee: $e');
+//       setState(() {
+//         _isLoadingEmployee = false;
+//       });
+//     }
+//   }
+
+//   void _onItemTapped(int index) {
+//     setState(() {
+//       _currentIndex = index;
+//     });
+//   }
+
+//   void _openDrawer() {
+//     _scaffoldKey.currentState?.openDrawer();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       key: _scaffoldKey,
+//       appBar: AppBar(
+//         backgroundColor: Colors.black,
+//         title: const Text(
+//           "Visitor Management",
+//           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+//         ),
+//         centerTitle: true,
+//         elevation: 0,
+//         leading: IconButton(
+//           icon: const Icon(Icons.menu, color: Colors.white),
+//           onPressed: _openDrawer,
+//         ),
+//         actions: [
+//           IconButton(
+//             icon: const Icon(Icons.refresh, color: Colors.white),
+//             onPressed: () {
+//               _fetchCurrentEmployee();
+//               if (_pages[_currentIndex] is DashboardContent) {
+//                 setState(() {});
+//               }
+//             },
+//             tooltip: 'Refresh',
+//           ),
+//         ],
+//       ),
+//       body: _pages[_currentIndex],
+//       bottomNavigationBar: BottomNavigationBar(
+//         backgroundColor: Colors.white,
+//         selectedItemColor: Colors.black,
+//         unselectedItemColor: Colors.grey,
+//         currentIndex: _currentIndex,
+//         type: BottomNavigationBarType.fixed,
+//         onTap: _onItemTapped,
+//         items: const [
+//           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+//           BottomNavigationBarItem(icon: Icon(Icons.people), label: "Visitors"),
+//           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+//         ],
+//       ),
+//       drawer: _currentIndex == 0 ? _buildDrawer() : null,
+//     );
+//   }
+
+//   Widget _buildDrawer() {
+//     return Drawer(
+//       child: Column(
+//         children: [
+//           // Profile Section - Takes appropriate space
+//           _buildProfileSection(),
+
+//           // Menu Items
+//           Expanded(
+//             child: ListView(
+//               padding: EdgeInsets.zero,
+//               children: [
+//                 const SizedBox(height: 8),
+//                 _buildDrawerItem(
+//                   icon: Icons.assessment,
+//                   title: 'Reports',
+//                   subtitle: 'Export visitor reports',
+//                   onTap: () {
+//                     Navigator.pop(context);
+//                     _openReportsPage();
+//                   },
+//                 ),
+//                 _buildDrawerItem(
+//                   icon: Icons.credit_card,
+//                   title: 'Generate ID Card',
+//                   subtitle: 'Create ID cards for visitors',
+//                   onTap: () {
+//                     Navigator.pop(context);
+//                     _openGenerateIDCardPage();
+//                   },
+//                 ),
+//                 const Divider(height: 32, thickness: 1),
+//                 _buildDrawerItem(
+//                   icon: Icons.logout,
+//                   title: 'Logout',
+//                   subtitle: 'Sign out from your account',
+//                   onTap: _logout,
+//                   color: Colors.red,
+//                 ),
+//                 const SizedBox(height: 20),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Widget _buildProfileSection() {
+//     return Container(
+//       width: double.infinity,
+//       decoration: BoxDecoration(
+//         gradient: LinearGradient(
+//           begin: Alignment.topLeft,
+//           end: Alignment.bottomRight,
+//           colors: [Colors.blue.shade700, Colors.blue.shade900],
+//         ),
+//         borderRadius: const BorderRadius.only(
+//           bottomLeft: Radius.circular(24),
+//           bottomRight: Radius.circular(24),
+//         ),
+//       ),
+//       child: SafeArea(
+//         child: Padding(
+//           padding: const EdgeInsets.fromLTRB(20, 30, 20, 25),
+//           child: Column(
+//             children: [
+//               // Profile Avatar
+//               Container(
+//                 width: 90,
+//                 height: 90,
+//                 decoration: BoxDecoration(
+//                   shape: BoxShape.circle,
+//                   border: Border.all(color: Colors.white, width: 3),
+//                   boxShadow: [
+//                     BoxShadow(
+//                       color: Colors.black.withOpacity(0.2),
+//                       blurRadius: 12,
+//                       offset: const Offset(0, 3),
+//                     ),
+//                   ],
+//                 ),
+//                 child: _buildProfilePhoto(),
+//               ),
+//               const SizedBox(height: 14),
+
+//               // Name
+//               Text(
+//                 _currentEmployee?['full_name'] ?? 'Loading...',
+//                 style: const TextStyle(
+//                   color: Colors.white,
+//                   fontSize: 20,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//                 textAlign: TextAlign.center,
+//               ),
+//               const SizedBox(height: 6),
+
+//               // Email
+//               Text(
+//                 _currentEmployee?['email'] ?? '',
+//                 style: TextStyle(
+//                   color: Colors.white.withOpacity(0.85),
+//                   fontSize: 13,
+//                 ),
+//                 textAlign: TextAlign.center,
+//               ),
+//               const SizedBox(height: 8),
+
+//               // Department & Designation
+//               if (_currentEmployee?['department'] != null ||
+//                   _currentEmployee?['designation'] != null)
+//                 Container(
+//                   padding:
+//                       const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+//                   decoration: BoxDecoration(
+//                     color: Colors.white.withOpacity(0.2),
+//                     borderRadius: BorderRadius.circular(20),
+//                   ),
+//                   child: Text(
+//                     '${_currentEmployee?['department'] ?? ''}${_currentEmployee?['department'] != null && _currentEmployee?['designation'] != null ? ' • ' : ''}${_currentEmployee?['designation'] ?? ''}',
+//                     style: TextStyle(
+//                       color: Colors.white.withOpacity(0.9),
+//                       fontSize: 12,
+//                       fontWeight: FontWeight.w500,
+//                     ),
+//                   ),
+//                 ),
+
+//               const SizedBox(height: 12),
+
+//               // Employee ID Badge
+//               if (_currentEmployee?['employee_code'] != null)
+//                 Container(
+//                   padding:
+//                       const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+//                   decoration: BoxDecoration(
+//                     color: Colors.white,
+//                     borderRadius: BorderRadius.circular(12),
+//                   ),
+//                   child: Text(
+//                     'ID: ${_currentEmployee?['employee_code']}',
+//                     style: TextStyle(
+//                       color: Colors.blue.shade700,
+//                       fontSize: 11,
+//                       fontWeight: FontWeight.w600,
+//                     ),
+//                   ),
+//                 ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget _buildProfilePhoto() {
+//     if (_isLoadingEmployee) {
+//       return const Center(
+//         child: CircularProgressIndicator(color: Colors.white),
+//       );
+//     }
+
+//     final photoUrl = _currentEmployee?['profile_picture'];
+
+//     if (photoUrl != null && photoUrl.isNotEmpty) {
+//       return ClipOval(
+//         child: Image.network(
+//           photoUrl,
+//           width: 90,
+//           height: 90,
+//           fit: BoxFit.cover,
+//           errorBuilder: (context, error, stackTrace) {
+//             return _buildInitialsAvatar();
+//           },
+//         ),
+//       );
+//     } else {
+//       return _buildInitialsAvatar();
+//     }
+//   }
+
+//   Widget _buildInitialsAvatar() {
+//     final name = _currentEmployee?['full_name'] ?? 'User';
+//     final initials = name
+//         .split(' ')
+//         .map((part) => part.isNotEmpty ? part[0] : '')
+//         .take(2)
+//         .join()
+//         .toUpperCase();
+
+//     return Container(
+//       width: 90,
+//       height: 90,
+//       decoration: BoxDecoration(
+//         color: Colors.white.withOpacity(0.3),
+//         shape: BoxShape.circle,
+//       ),
+//       child: Center(
+//         child: Text(
+//           initials,
+//           style: const TextStyle(
+//             color: Colors.white,
+//             fontSize: 32,
+//             fontWeight: FontWeight.bold,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget _buildDrawerItem({
+//     required IconData icon,
+//     required String title,
+//     String? subtitle,
+//     required VoidCallback onTap,
+//     Color color = Colors.black87,
+//   }) {
+//     return ListTile(
+//       leading: Container(
+//         padding: const EdgeInsets.all(8),
+//         decoration: BoxDecoration(
+//           color: color.withOpacity(0.1),
+//           borderRadius: BorderRadius.circular(10),
+//         ),
+//         child: Icon(icon, color: color, size: 22),
+//       ),
+//       title: Text(
+//         title,
+//         style: TextStyle(
+//           color: color,
+//           fontSize: 15,
+//           fontWeight: FontWeight.w600,
+//         ),
+//       ),
+//       subtitle: subtitle != null
+//           ? Text(
+//               subtitle,
+//               style: TextStyle(
+//                 color: Colors.grey.shade600,
+//                 fontSize: 12,
+//               ),
+//             )
+//           : null,
+//       trailing:
+//           Icon(Icons.chevron_right, color: Colors.grey.shade400, size: 20),
+//       onTap: onTap,
+//       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+//     );
+//   }
+
+//   void _openReportsPage() {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => const ReportsPage()),
+//     );
+//   }
+
+//   void _openGenerateIDCardPage() {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => const GenerateIDCardPage()),
+//     );
+//   }
+
+//   Future<void> _logout() async {
+//     final confirmed = await showDialog<bool>(
+//       context: context,
+//       builder: (context) => AlertDialog(
+//         title: const Text('Logout'),
+//         content: const Text('Are you sure you want to logout?'),
+//         actions: [
+//           TextButton(
+//             onPressed: () => Navigator.pop(context, false),
+//             child: const Text('Cancel'),
+//           ),
+//           ElevatedButton(
+//             onPressed: () => Navigator.pop(context, true),
+//             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+//             child: const Text('Logout'),
+//           ),
+//         ],
+//       ),
+//     );
+
+//     if (confirmed == true) {
+//       await ApiService.logout();
+//       if (mounted) {
+//         Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+//       }
+//     }
+//   }
+// }
+
+// Reports Page
+class ReportsPage extends StatefulWidget {
+  const ReportsPage({super.key});
+
+  @override
+  State<ReportsPage> createState() => _ReportsPageState();
+}
+
+class _ReportsPageState extends State<ReportsPage> {
+  bool _isLoading = false;
+  DateTime? _startDate;
+  DateTime? _endDate;
+  String _selectedStatus = 'all';
+  final List<String> _statusOptions = [
+    'all',
+    'pending',
+    'approved',
+    'rejected',
+    'checked_in',
+    'checked_out'
+  ];
+
+  Future<void> _exportReport() async {
+    if (_startDate == null || _endDate == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select both start and end dates'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      final response = await ApiService.exportVisitorsReport(
+        _startDate!,
+        _endDate!,
+        status: _selectedStatus,
+      );
+
+      // Save file
+      final blob = html.Blob([response]);
+      final url = html.Url.createObjectUrlFromBlob(blob);
+      final anchor = html.AnchorElement(href: url)
+        ..target = 'blank'
+        ..download =
+            'visitors_report_${_startDate!.toIso8601String().split('T')[0]}_to_${_endDate!.toIso8601String().split('T')[0]}.xlsx';
+      anchor.click();
+      html.Url.revokeObjectUrl(url);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Report exported successfully!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
+      );
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[100],
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text(
+          'Reports',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        ),
+        centerTitle: true,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.03),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.assessment,
+                        color: Colors.blue, size: 28),
+                  ),
+                  const SizedBox(width: 16),
+                  const Expanded(
+                    child: Text(
+                      'Export Visitors Report',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+
+            // Date Range Selection
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.03),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Select Date Range',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  // Start Date
+                  GestureDetector(
+                    onTap: () => _selectDate(context, isStart: true),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 14),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[50],
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey[300]!),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.calendar_today,
+                              size: 20, color: Colors.grey),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              _startDate != null
+                                  ? 'Start Date: ${_formatDate(_startDate!)}'
+                                  : 'Select Start Date',
+                              style: TextStyle(
+                                color: _startDate != null
+                                    ? Colors.black87
+                                    : Colors.grey[500],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  // End Date
+                  GestureDetector(
+                    onTap: () => _selectDate(context, isStart: false),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 14),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[50],
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey[300]!),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.calendar_today,
+                              size: 20, color: Colors.grey),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              _endDate != null
+                                  ? 'End Date: ${_formatDate(_endDate!)}'
+                                  : 'Select End Date',
+                              style: TextStyle(
+                                color: _endDate != null
+                                    ? Colors.black87
+                                    : Colors.grey[500],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Status Filter
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.03),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Filter by Status',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  DropdownButtonFormField<String>(
+                    value: _selectedStatus,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16),
+                    ),
+                    items: _statusOptions.map((status) {
+                      return DropdownMenuItem(
+                        value: status,
+                        child: Text(status.toUpperCase()),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedStatus = value!;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+
+            // Export Button
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _isLoading ? null : _exportReport,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: _isLoading
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.download, size: 20),
+                          SizedBox(width: 8),
+                          Text('Export Report'),
+                        ],
+                      ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _selectDate(BuildContext context,
+      {required bool isStart}) async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        if (isStart) {
+          _startDate = picked;
+        } else {
+          _endDate = picked;
+        }
+      });
+    }
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year}';
+  }
+}
+
+// Generate ID Card Page
+class GenerateIDCardPage extends StatefulWidget {
+  const GenerateIDCardPage({super.key});
+
+  @override
+  State<GenerateIDCardPage> createState() => _GenerateIDCardPageState();
+}
+
+class _GenerateIDCardPageState extends State<GenerateIDCardPage> {
+  List<dynamic> _visitors = [];
+  List<int> _selectedVisitorIds = [];
+  bool _isLoading = true;
+  bool _isGenerating = false;
+  bool _withPhoto = false;
+  String _searchQuery = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchApprovedVisitors();
+  }
+
+  Future<void> _fetchApprovedVisitors() async {
+    setState(() => _isLoading = true);
+    try {
+      final allVisitors = await ApiService.getAllVisitors();
+      // Filter only approved or partially approved visitors
+      final approvedVisitors = allVisitors.where((v) {
+        final status = v['status'] ?? '';
+        return status == 'approved' || status == 'partially_approved';
+      }).toList();
+
+      setState(() {
+        _visitors = approvedVisitors;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
+      );
+    }
+  }
+
+  Future<void> _generateIDCard() async {
+    if (_selectedVisitorIds.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select at least one visitor'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    setState(() => _isGenerating = true);
+
+    try {
+      if (_selectedVisitorIds.length == 1) {
+        // Single ID card
+        final bytes = await ApiService.downloadIDCard(
+          _selectedVisitorIds.first,
+          withPhoto: _withPhoto,
+        );
+        if (bytes != null) {
+          final blob = html.Blob([bytes]);
+          final url = html.Url.createObjectUrlFromBlob(blob);
+          final anchor = html.AnchorElement(href: url)
+            ..target = 'blank'
+            ..download = 'visitor_id_card_${_selectedVisitorIds.first}.pdf';
+          anchor.click();
+          html.Url.revokeObjectUrl(url);
+        }
+      } else {
+        // Bulk ID cards
+        final bytes = await ApiService.bulkDownloadIDCards(_selectedVisitorIds);
+        if (bytes != null) {
+          final blob = html.Blob([bytes]);
+          final url = html.Url.createObjectUrlFromBlob(blob);
+          final anchor = html.AnchorElement(href: url)
+            ..target = 'blank'
+            ..download = 'bulk_id_cards.pdf';
+          anchor.click();
+          html.Url.revokeObjectUrl(url);
+        }
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('ID Card(s) generated successfully!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
+      );
+    } finally {
+      setState(() => _isGenerating = false);
+    }
+  }
+
+  List<dynamic> get _filteredVisitors {
+    if (_searchQuery.isEmpty) return _visitors;
+    return _visitors.where((v) {
+      final name = v['full_name']?.toLowerCase() ?? '';
+      final email = v['email']?.toLowerCase() ?? '';
+      final query = _searchQuery.toLowerCase();
+      return name.contains(query) || email.contains(query);
+    }).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[100],
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text(
+          'Generate ID Card',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        ),
+        centerTitle: true,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh, color: Colors.white),
+            onPressed: _fetchApprovedVisitors,
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          // Search Bar
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: TextField(
+                onChanged: (value) => setState(() => _searchQuery = value),
+                decoration: InputDecoration(
+                  hintText: 'Search visitors...',
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+              ),
+            ),
+          ),
+
+          // Options
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: [
+                const Text('Include Photo:'),
+                const SizedBox(width: 12),
+                Switch(
+                  value: _withPhoto,
+                  onChanged: (value) => setState(() => _withPhoto = value),
+                  activeColor: Colors.blue,
+                ),
+                const Spacer(),
+                Text(
+                  'Selected: ${_selectedVisitorIds.length}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.blue,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 12),
+
+          // Visitors List
+          Expanded(
+            child: _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : _filteredVisitors.isEmpty
+                    ? const Center(
+                        child: Text('No approved visitors found'),
+                      )
+                    : ListView.builder(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: _filteredVisitors.length,
+                        itemBuilder: (context, index) {
+                          final visitor = _filteredVisitors[index];
+                          final isSelected =
+                              _selectedVisitorIds.contains(visitor['id']);
+                          return Card(
+                            margin: const EdgeInsets.only(bottom: 12),
+                            child: CheckboxListTile(
+                              title: Text(
+                                visitor['full_name'] ?? 'Unknown',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(visitor['email'] ?? 'No email'),
+                                  Text(
+                                    'Status: ${visitor['status']?.toUpperCase() ?? 'UNKNOWN'}',
+                                    style: TextStyle(
+                                      color: visitor['status'] == 'approved'
+                                          ? Colors.green
+                                          : Colors.orange,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              value: isSelected,
+                              onChanged: (selected) {
+                                setState(() {
+                                  if (selected == true) {
+                                    _selectedVisitorIds.add(visitor['id']);
+                                  } else {
+                                    _selectedVisitorIds.remove(visitor['id']);
+                                  }
+                                });
+                              },
+                              secondary: const Icon(Icons.credit_card,
+                                  color: Colors.blue),
+                            ),
+                          );
+                        },
+                      ),
+          ),
+
+          // Generate Button
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 8,
+                  offset: const Offset(0, -2),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _isGenerating ? null : _generateIDCard,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: _isGenerating
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.print, size: 20),
+                          SizedBox(width: 8),
+                          Text('Generate ID Card(s)'),
+                        ],
+                      ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
 
-class DashboardContent extends StatelessWidget {
+class DashboardContent extends StatefulWidget {
   const DashboardContent({super.key});
+
+  @override
+  State<DashboardContent> createState() => _DashboardContentState();
+}
+
+class _DashboardContentState extends State<DashboardContent> {
+  bool _isLoading = true;
+  int _pendingApprovals = 0;
+  int _lateVisitors = 0;
+  int _scheduledToday = 0;
+  String? _errorMessage;
+
+  // Notifications
+  List<NotificationItem> _existingNotifications = [];
+  List<NotificationItem> _realtimeNotifications = [];
+  bool _loadingNotifications = true;
+  WebSocketChannel? _channel;
+  int _unreadCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _fetchDashboardCounts();
+      _fetchExistingNotifications();
+      _connectWebSocket();
+    });
+  }
+
+  @override
+  void dispose() {
+    _channel?.sink.close();
+    super.dispose();
+  }
+
+  Future<void> _connectWebSocket() async {
+    try {
+      final token = await ApiService.getAccessToken();
+      if (token == null) {
+        print('No token available for WebSocket connection');
+        return;
+      }
+
+      final wsUrl =
+          Uri.parse('ws://localhost:8001/ws/notifications/?token=$token');
+      _channel = IOWebSocketChannel.connect(wsUrl);
+
+      _channel!.stream.listen(
+        (message) {
+          _handleWebSocketMessage(message);
+        },
+        onError: (error) {
+          print('WebSocket error: $error');
+        },
+        onDone: () {
+          print('WebSocket connection closed');
+          // Attempt to reconnect after 5 seconds
+          Future.delayed(const Duration(seconds: 5), () {
+            if (mounted) {
+              _connectWebSocket();
+            }
+          });
+        },
+      );
+    } catch (e) {
+      print('Failed to connect WebSocket: $e');
+    }
+  }
+
+  void _handleWebSocketMessage(dynamic message) {
+    try {
+      print('Raw WebSocket message: $message');
+
+      Map<String, dynamic> data;
+
+      if (message is String) {
+        data = json.decode(message);
+      } else if (message is Map<String, dynamic>) {
+        data = message;
+      } else {
+        print('Unexpected message type: ${message.runtimeType}');
+        return;
+      }
+
+      Map<String, dynamic> notificationData;
+
+      if (data.containsKey('data') && data['data'] is Map<String, dynamic>) {
+        notificationData = data['data'];
+      } else if (data.containsKey('title') && data.containsKey('message')) {
+        notificationData = data;
+      } else {
+        print('Unknown notification format: $data');
+        return;
+      }
+
+      final notification = NotificationItem(
+        id: notificationData['id'] ?? DateTime.now().millisecondsSinceEpoch,
+        type: notificationData['type'] ?? data['type'] ?? 'notification',
+        title: notificationData['title'] ?? 'New Notification',
+        message: notificationData['message'] ?? 'You have a new notification',
+        createdAt: DateTime.now(),
+        isRead: false,
+        data: notificationData,
+      );
+
+      setState(() {
+        _realtimeNotifications.insert(0, notification);
+        _unreadCount++;
+      });
+
+      _showNotificationSnackBar(notification);
+    } catch (e) {
+      print('Error parsing WebSocket message: $e');
+    }
+  }
+
+  void _showNotificationSnackBar(NotificationItem notification) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(
+              _getNotificationIcon(notification.type),
+              color: Colors.white,
+              size: 20,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    notification.title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Text(
+                    notification.message,
+                    style: const TextStyle(fontSize: 12),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        backgroundColor:
+            notification.isUrgent ? Colors.red.shade700 : Colors.black87,
+        duration: const Duration(seconds: 4),
+        action: SnackBarAction(
+          label: 'View',
+          onPressed: () {
+            _handleNotificationTap(notification);
+          },
+        ),
+      ),
+    );
+  }
+
+  Future<void> _fetchExistingNotifications() async {
+    if (!mounted) return;
+
+    setState(() {
+      _loadingNotifications = true;
+    });
+
+    try {
+      final token = await ApiService.getAccessToken();
+      if (token == null) return;
+
+      final response = await ApiService.getNotifications();
+
+      setState(() {
+        _existingNotifications =
+            (response as List).map((n) => NotificationItem.fromApi(n)).toList();
+        _unreadCount = _existingNotifications.where((n) => !n.isRead).length;
+        _loadingNotifications = false;
+      });
+    } catch (e) {
+      print('Error fetching notifications: $e');
+      setState(() {
+        _loadingNotifications = false;
+      });
+    }
+  }
+
+  Future<void> _markAsRead(int id, bool isRealtime, int index) async {
+    try {
+      await ApiService.markNotificationRead(id);
+
+      setState(() {
+        if (isRealtime) {
+          _realtimeNotifications[index].isRead = true;
+        } else {
+          _existingNotifications[index].isRead = true;
+        }
+        _unreadCount = _getTotalUnreadCount();
+      });
+    } catch (e) {
+      print('Error marking notification as read: $e');
+    }
+  }
+
+  Future<void> _markAllAsRead() async {
+    try {
+      await ApiService.markAllNotificationsRead();
+
+      setState(() {
+        for (var notification in _existingNotifications) {
+          notification.isRead = true;
+        }
+        for (var notification in _realtimeNotifications) {
+          notification.isRead = true;
+        }
+        _unreadCount = 0;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('All notifications marked as read')),
+      );
+    } catch (e) {
+      print('Error marking all as read: $e');
+    }
+  }
+
+  int _getTotalUnreadCount() {
+    int count = _existingNotifications.where((n) => !n.isRead).length;
+    count += _realtimeNotifications.where((n) => !n.isRead).length;
+    return count;
+  }
+
+  IconData _getNotificationIcon(String type) {
+    switch (type) {
+      case 'approval_request':
+        return Icons.person_add_alt_1;
+      case 'approval_update':
+        return Icons.check_circle_outline;
+      case 'status_change':
+        return Icons.timeline;
+      case 'section_checkin':
+        return Icons.login;
+      case 'section_checkout':
+        return Icons.logout;
+      default:
+        return Icons.notifications;
+    }
+  }
+
+  Color _getNotificationColor(String type) {
+    switch (type) {
+      case 'approval_request':
+        return Colors.blue;
+      case 'approval_update':
+        return Colors.green;
+      case 'status_change':
+        return Colors.orange;
+      case 'section_checkin':
+        return Colors.purple;
+      case 'section_checkout':
+        return Colors.grey;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  void _handleNotificationTap(NotificationItem notification) {
+    print('Tapped: ${notification.title}');
+  }
+
+  void _showNotificationsDialog() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.9,
+        minChildSize: 0.5,
+        maxChildSize: 0.95,
+        builder: (_, scrollController) => Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey.shade200),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          'Notifications',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        if (_unreadCount > 0)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              '$_unreadCount',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    if (_unreadCount > 0)
+                      TextButton(
+                        onPressed: _markAllAsRead,
+                        child: const Text('Mark all as read'),
+                      ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: _loadingNotifications
+                    ? const Center(child: CircularProgressIndicator())
+                    : RefreshIndicator(
+                        onRefresh: _fetchExistingNotifications,
+                        child: ListView(
+                          controller: scrollController,
+                          children: [
+                            if (_realtimeNotifications.isNotEmpty)
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(12),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 8,
+                                          height: 8,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.green,
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        const Text(
+                                          'Live Updates',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  ..._realtimeNotifications
+                                      .asMap()
+                                      .entries
+                                      .map((entry) {
+                                    int idx = entry.key;
+                                    NotificationItem notification = entry.value;
+                                    return _NotificationTile(
+                                      notification: notification,
+                                      icon: _getNotificationIcon(
+                                          notification.type),
+                                      color: _getNotificationColor(
+                                          notification.type),
+                                      onTap: () =>
+                                          _handleNotificationTap(notification),
+                                      onMarkRead: () => _markAsRead(
+                                          notification.id, true, idx),
+                                    );
+                                  }),
+                                  const Divider(),
+                                ],
+                              ),
+                            if (_existingNotifications.isNotEmpty)
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(12),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 8,
+                                          height: 8,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.blue,
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        const Text(
+                                          'Previous Notifications',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.blue,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  ..._existingNotifications
+                                      .asMap()
+                                      .entries
+                                      .map((entry) {
+                                    int idx = entry.key;
+                                    NotificationItem notification = entry.value;
+                                    return _NotificationTile(
+                                      notification: notification,
+                                      icon: _getNotificationIcon(
+                                          notification.type),
+                                      color: _getNotificationColor(
+                                          notification.type),
+                                      onTap: () =>
+                                          _handleNotificationTap(notification),
+                                      onMarkRead: () => _markAsRead(
+                                          notification.id, false, idx),
+                                    );
+                                  }),
+                                ],
+                              ),
+                            if (_existingNotifications.isEmpty &&
+                                _realtimeNotifications.isEmpty)
+                              const Padding(
+                                padding: EdgeInsets.all(32),
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                      Icon(Icons.notifications_none,
+                                          size: 64, color: Colors.grey),
+                                      SizedBox(height: 16),
+                                      Text(
+                                        'No notifications',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _fetchDashboardCounts() async {
+    if (!mounted) return;
+
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      final token = await ApiService.getAccessToken();
+      print('Token exists: ${token != null}');
+
+      if (token == null) {
+        print('No token found, waiting for login...');
+        setState(() {
+          _errorMessage = 'Please login to view dashboard';
+          _isLoading = false;
+        });
+        return;
+      }
+
+      final response = await ApiService.getDashboardCounts();
+
+      setState(() {
+        _pendingApprovals = response['pending_approvals'] ?? 0;
+        _lateVisitors = response['checkin_summary']?['late'] ?? 0;
+        _scheduledToday = response['scheduled_today'] ?? 0;
+        _isLoading = false;
+      });
+
+      print(
+          'Dashboard data loaded: pending=$_pendingApprovals, late=$_lateVisitors, scheduled=$_scheduledToday');
+    } catch (e) {
+      print('Error fetching dashboard counts: $e');
+      setState(() {
+        _errorMessage = e.toString();
+        _pendingApprovals = 0;
+        _lateVisitors = 0;
+        _scheduledToday = 0;
+        _isLoading = false;
+      });
+    }
+  }
 
   String _formattedDate() {
     final now = DateTime.now();
@@ -853,22 +4279,12 @@ class DashboardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F8FA),
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text(
-          "Dashboard",
-          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
-        ),
-        centerTitle: true,
-        elevation: 0,
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── Header row ──────────────────────────────────────────────
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -900,52 +4316,96 @@ class DashboardContent extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-
-              // ── Stat cards ───────────────────────────────────────────────
-              // Using a Row instead of GridView so each card sizes to content
-              // and we avoid the "too-tall card" problem from childAspectRatio.
+              if (_errorMessage != null)
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  margin: const EdgeInsets.only(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.red.shade50,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.red.shade200),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.error_outline,
+                          color: Colors.red.shade700, size: 20),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          _errorMessage!,
+                          style: TextStyle(
+                              color: Colors.red.shade700, fontSize: 12),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: _fetchDashboardCounts,
+                        child: const Text('Retry'),
+                      ),
+                    ],
+                  ),
+                ),
               IntrinsicHeight(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: const [
+                  children: [
                     Expanded(
-                      child: _StatCard(
-                        title: "Total\nEmployees",
-                        value: "120",
-                        color: Color(0xFF3B82F6),
-                        icon: Icons.people,
-                        trend: "+12",
-                        trendLabel: "+12 this month",
+                      child: GestureDetector(
+                        onTap: () {
+                          if (_pendingApprovals > 0) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const PendingApprovalsPage(),
+                              ),
+                            );
+                          }
+                        },
+                        child: _StatCard(
+                          title: "Pending\nApprovals",
+                          value:
+                              _isLoading ? "..." : _pendingApprovals.toString(),
+                          color: const Color(0xFF8B5CF6),
+                          icon: Icons.assignment_turned_in,
+                          trend: _pendingApprovals > 0
+                              ? "Action needed"
+                              : "All clear",
+                          trendLabel: _pendingApprovals > 0
+                              ? "$_pendingApprovals visitor(s) need approval"
+                              : "No pending approvals",
+                        ),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: _StatCard(
-                        title: "Total\nVisitors",
-                        value: "45",
-                        color: Color(0xFFF59E0B),
-                        icon: Icons.group,
-                        trend: "+8",
-                        trendLabel: "+8 since yesterday",
+                        title: "Late\nVisitors",
+                        value: _isLoading ? "..." : _lateVisitors.toString(),
+                        color: const Color(0xFFEF4444),
+                        icon: Icons.warning_amber_rounded,
+                        trend: _lateVisitors > 0 ? "Alert" : "On time",
+                        trendLabel: _lateVisitors > 0
+                            ? "$_lateVisitors visitor(s) arrived late"
+                            : "All visitors on time",
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: _StatCard(
-                        title: "Active\nNow",
-                        value: "18",
-                        color: Color(0xFF10B981),
-                        icon: Icons.flash_on,
-                        trend: "Peak",
-                        trendLabel: "Peak: 2–3 PM",
+                        title: "Scheduled\nToday",
+                        value: _isLoading ? "..." : _scheduledToday.toString(),
+                        color: const Color(0xFF10B981),
+                        icon: Icons.calendar_today,
+                        trend: _scheduledToday > 0 ? "Upcoming" : "No visits",
+                        trendLabel: _scheduledToday > 0
+                            ? "$_scheduledToday visitor(s) scheduled"
+                            : "No visits scheduled today",
                       ),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 16),
-
-              // ── Recent Activity ──────────────────────────────────────────
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -956,7 +4416,7 @@ class DashboardContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(14, 14, 8, 0),
+                      padding: const EdgeInsets.fromLTRB(14, 14, 14, 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -968,21 +4428,80 @@ class DashboardContent extends StatelessWidget {
                               color: Colors.black87,
                             ),
                           ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "View All",
-                              style: TextStyle(fontSize: 12),
+                          GestureDetector(
+                            onTap: _showNotificationsDialog,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.blue.shade50,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.list_alt,
+                                      size: 14, color: Colors.blue.shade700),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    'View All',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.blue.shade700,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const _ActivityTile("Visitor John checked in"),
-                    const _ActivityTile("Employee added"),
-                    const _ActivityTile("Visitor Jane checked out"),
-                    const _ActivityTile("Security alert triggered"),
-                    const _ActivityTile("Visitor Alex checked in"),
+                    if (_realtimeNotifications.isNotEmpty ||
+                        _existingNotifications.isNotEmpty)
+                      Column(
+                        children: [
+                          ...(_realtimeNotifications
+                              .take(3)
+                              .map((notification) => _RecentNotificationTile(
+                                    notification: notification,
+                                    icon:
+                                        _getNotificationIcon(notification.type),
+                                    color: _getNotificationColor(
+                                        notification.type),
+                                    isRealTime: true,
+                                  ))),
+                          ...(_existingNotifications
+                              .take(3 - _realtimeNotifications.length)
+                              .map((notification) => _RecentNotificationTile(
+                                    notification: notification,
+                                    icon:
+                                        _getNotificationIcon(notification.type),
+                                    color: _getNotificationColor(
+                                        notification.type),
+                                    isRealTime: false,
+                                  ))),
+                        ],
+                      )
+                    else
+                      const Padding(
+                        padding: EdgeInsets.all(32.0),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Icon(Icons.notifications_none,
+                                  size: 48, color: Colors.grey),
+                              SizedBox(height: 12),
+                              Text(
+                                "No recent activity",
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     const SizedBox(height: 6),
                   ],
                 ),
@@ -995,9 +4514,265 @@ class DashboardContent extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Stat Card
-// ─────────────────────────────────────────────────────────────────────────────
+class NotificationItem {
+  final int id;
+  final String type;
+  final String title;
+  final String message;
+  final DateTime createdAt;
+  bool isRead;
+  final Map<String, dynamic>? data;
+
+  NotificationItem({
+    required this.id,
+    required this.type,
+    required this.title,
+    required this.message,
+    required this.createdAt,
+    required this.isRead,
+    this.data,
+  });
+
+  factory NotificationItem.fromApi(Map<String, dynamic> json) {
+    return NotificationItem(
+      id: json['id'],
+      type: json['type'] ?? 'notification',
+      title: json['title'],
+      message: json['message'],
+      createdAt: DateTime.parse(json['created_at']),
+      isRead: json['is_read'] ?? false,
+      data: json['data'],
+    );
+  }
+
+  factory NotificationItem.fromWebSocket(Map<String, dynamic> data) {
+    final notificationData =
+        data.containsKey('data') && data['data'] is Map<String, dynamic>
+            ? data['data'] as Map<String, dynamic>
+            : data;
+
+    return NotificationItem(
+      id: notificationData['id'] ?? DateTime.now().millisecondsSinceEpoch,
+      type: notificationData['type'] ?? data['type'] ?? 'notification',
+      title: notificationData['title'] ?? 'New Notification',
+      message: notificationData['message'] ?? 'You have a new notification',
+      createdAt: DateTime.now(),
+      isRead: false,
+      data: notificationData,
+    );
+  }
+
+  bool get isUrgent {
+    return type == 'approval_request' ||
+        type == 'approval_update' ||
+        type == 'status_change';
+  }
+}
+
+class _NotificationTile extends StatelessWidget {
+  final NotificationItem notification;
+  final IconData icon;
+  final Color color;
+  final VoidCallback onTap;
+  final VoidCallback onMarkRead;
+
+  const _NotificationTile({
+    required this.notification,
+    required this.icon,
+    required this.color,
+    required this.onTap,
+    required this.onMarkRead,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: Colors.grey.shade100),
+          ),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(icon, color: color, size: 20),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          notification.title,
+                          style: TextStyle(
+                            fontWeight: notification.isRead
+                                ? FontWeight.normal
+                                : FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      if (!notification.isRead)
+                        Container(
+                          width: 8,
+                          height: 8,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    notification.message,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[600],
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    _formatTime(notification.createdAt),
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey[400],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (!notification.isRead)
+              IconButton(
+                icon: const Icon(Icons.done_all, size: 18),
+                onPressed: onMarkRead,
+                tooltip: 'Mark as read',
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _formatTime(DateTime time) {
+    final now = DateTime.now();
+    final difference = now.difference(time);
+
+    if (difference.inDays > 0) {
+      return '${difference.inDays}d ago';
+    } else if (difference.inHours > 0) {
+      return '${difference.inHours}h ago';
+    } else if (difference.inMinutes > 0) {
+      return '${difference.inMinutes}m ago';
+    } else {
+      return 'Just now';
+    }
+  }
+}
+
+class _RecentNotificationTile extends StatelessWidget {
+  final NotificationItem notification;
+  final IconData icon;
+  final Color color;
+  final bool isRealTime;
+
+  const _RecentNotificationTile({
+    required this.notification,
+    required this.icon,
+    required this.color,
+    required this.isRealTime,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Colors.grey.shade100),
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(icon, color: color, size: 16),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        notification.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 13,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    if (isRealTime)
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.green.shade100,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Text(
+                          'LIVE',
+                          style: TextStyle(
+                            fontSize: 8,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  notification.message,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Colors.grey[600],
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          Icon(Icons.chevron_right, size: 16, color: Colors.grey[400]),
+        ],
+      ),
+    );
+  }
+}
 
 class _StatCard extends StatelessWidget {
   final String title;
@@ -1024,12 +4799,18 @@ class _StatCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: Colors.grey.shade100),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.05),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Icon + trend badge row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1045,31 +4826,29 @@ class _StatCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                 decoration: BoxDecoration(
-                  color: Colors.green.shade50,
+                  color: trend == "Alert" || trend == "Action needed"
+                      ? Colors.orange.shade50
+                      : (trend == "All clear" || trend == "On time"
+                          ? Colors.green.shade50
+                          : Colors.blue.shade50),
                   borderRadius: BorderRadius.circular(6),
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.trending_up,
-                        size: 10, color: Colors.green.shade700),
-                    const SizedBox(width: 2),
-                    Text(
-                      trend,
-                      style: TextStyle(
-                        fontSize: 9,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.green.shade700,
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  trend,
+                  style: TextStyle(
+                    fontSize: 9,
+                    fontWeight: FontWeight.w600,
+                    color: trend == "Alert" || trend == "Action needed"
+                        ? Colors.orange.shade700
+                        : (trend == "All clear" || trend == "On time"
+                            ? Colors.green.shade700
+                            : Colors.blue.shade700),
+                  ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10),
-
-          // Big number
           Text(
             value,
             style: TextStyle(
@@ -1080,8 +4859,6 @@ class _StatCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-
-          // Title (two lines allowed)
           Text(
             title,
             style: const TextStyle(
@@ -1092,8 +4869,6 @@ class _StatCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-
-          // Trend label pill
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
             decoration: BoxDecoration(
@@ -1107,120 +4882,8 @@ class _StatCard extends StatelessWidget {
                 color: color,
                 fontWeight: FontWeight.w500,
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Activity Tile
-// ─────────────────────────────────────────────────────────────────────────────
-
-class _ActivityTile extends StatelessWidget {
-  final String text;
-  const _ActivityTile(this.text);
-
-  IconData get _icon {
-    if (text.contains("checked in")) return Icons.login;
-    if (text.contains("checked out")) return Icons.logout;
-    if (text.contains("added")) return Icons.person_add;
-    if (text.contains("alert")) return Icons.warning_amber_rounded;
-    return Icons.info_outline;
-  }
-
-  Color get _color {
-    if (text.contains("checked in")) return Colors.green;
-    if (text.contains("checked out")) return const Color(0xFFF59E0B);
-    if (text.contains("added")) return Colors.blue;
-    if (text.contains("alert")) return Colors.red;
-    return Colors.grey;
-  }
-
-  String get _time {
-    if (text.contains("John")) return "09:14 AM";
-    if (text.contains("added")) return "09:02 AM";
-    if (text.contains("Jane")) return "08:55 AM";
-    if (text.contains("alert")) return "08:40 AM";
-    if (text.contains("Alex")) return "08:30 AM";
-    return "Recently";
-  }
-
-  String get _location {
-    if (text.contains("John")) return "Main Entrance";
-    if (text.contains("added")) return "HR Department";
-    if (text.contains("Jane")) return "West Wing";
-    if (text.contains("alert")) return "Security Office";
-    if (text.contains("Alex")) return "North Entrance";
-    return "Unknown";
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      child: Row(
-        children: [
-          // Icon container
-          Container(
-            width: 38,
-            height: 38,
-            decoration: BoxDecoration(
-              color: _color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Icon(_icon, size: 18, color: _color),
-          ),
-          const SizedBox(width: 12),
-
-          // Text info
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  text,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 3),
-                Row(
-                  children: [
-                    Icon(Icons.access_time, size: 10, color: Colors.grey[400]),
-                    const SizedBox(width: 3),
-                    Text(
-                      _time,
-                      style: TextStyle(fontSize: 10, color: Colors.grey[500]),
-                    ),
-                    const SizedBox(width: 10),
-                    Icon(Icons.location_on, size: 10, color: Colors.grey[400]),
-                    const SizedBox(width: 3),
-                    Flexible(
-                      child: Text(
-                        _location,
-                        style: TextStyle(fontSize: 10, color: Colors.grey[500]),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          // Status dot
-          Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              color: _color,
-              shape: BoxShape.circle,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
