@@ -3797,8 +3797,11 @@ class _DashboardContentState extends State<DashboardContent> {
         return;
       }
 
-      final wsUrl =
-          Uri.parse('ws://localhost:8001/ws/notifications/?token=$token');
+      // final wsUrl =
+      //     Uri.parse('ws://localhost:8001/ws/notifications/?token=$token');
+      final wsUrl = Uri.parse(
+        'wss://vms-backend-drf-avdygnb6afcchbhg.centralindia-01.azurewebsites.net/ws/notifications/?token=$token',
+      );
       _channel = IOWebSocketChannel.connect(wsUrl);
 
       _channel!.stream.listen(

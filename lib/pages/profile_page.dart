@@ -1133,6 +1133,8 @@ import 'package:http/http.dart' as http;
 import 'package:modernlogintute/components/token_services.dart';
 import 'dart:convert';
 
+const String baseUrl = 'https://vms-backend-drf-avdygnb6afcchbhg.centralindia-01.azurewebsites.net';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -1169,7 +1171,7 @@ class _ProfilePageState extends State<ProfilePage> {
       }
 
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:8000/account/employees/me/'),
+        Uri.parse('$baseUrl/employees/me/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -1747,7 +1749,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                 if (accessToken != null && refreshToken != null) {
                   await http.post(
-                    Uri.parse('http://127.0.0.1:8000/account/auth/logout/'),
+                    Uri.parse('$baseUrl/account/auth/logout/'),
                     headers: {
                       'Content-Type': 'application/json',
                       'Authorization': 'Bearer $accessToken',

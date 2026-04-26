@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:modernlogintute/components/token_services.dart';
 import 'package:modernlogintute/pages/home_page.dart';
+import 'package:modernlogintute/pages/pending_approvals_page.dart';
 import 'package:modernlogintute/pages/register_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -58,7 +59,7 @@ class LoginPage extends StatelessWidget {
 
     try {
       final response = await http.post(
-        Uri.parse('http://localhost:8000/api/login/'),
+        Uri.parse('$baseUrl/api/login/'),
         headers: {
           'Content-Type': 'application/json',
         },

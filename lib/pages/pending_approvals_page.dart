@@ -909,6 +909,9 @@ import 'package:flutter/material.dart';
 import 'package:modernlogintute/services/api_services.dart';
 import 'package:intl/intl.dart';
 
+const String baseUrl =
+    'https://vms-backend-drf-avdygnb6afcchbhg.centralindia-01.azurewebsites.net';
+
 class PendingApprovalsPage extends StatefulWidget {
   const PendingApprovalsPage({super.key});
 
@@ -970,7 +973,11 @@ class _PendingApprovalsPageState extends State<PendingApprovalsPage> {
     // If it's already a full URL, return as is
     if (photoPath.startsWith('http')) return photoPath;
     // Otherwise, prepend the base URL
-    return 'http://127.0.0.1:8000$photoPath';
+    if (photoPath.startsWith('/')) {
+      return '$baseUrl$photoPath';
+    } else {
+      return '$baseUrl/$photoPath';
+    }
   }
 
   Future<void> _approveSection(
