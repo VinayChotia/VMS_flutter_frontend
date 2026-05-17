@@ -2007,11 +2007,59 @@ class _VisitorCard extends StatelessWidget {
     }
   }
 
+  String _getImageUrl() {
+    const String baseUrl =
+        'https://vms-backend-drf-avdygnb6afcchbhg.centralindia-01.azurewebsites.net';
+
+    // Try to get the photo URL - same logic as Pending Approvals page
+    String? photoPath;
+
+    // Check for visitor_photo field (used in pending approvals)
+    if (visitor.containsKey('visitor_photo') &&
+        visitor['visitor_photo'] != null) {
+      photoPath = visitor['visitor_photo'];
+    }
+    // Check for photo_display_url field
+    else if (visitor.containsKey('photo_display_url') &&
+        visitor['photo_display_url'] != null) {
+      photoPath = visitor['photo_display_url'];
+    }
+    // Check for photo field
+    else if (visitor.containsKey('photo') && visitor['photo'] != null) {
+      photoPath = visitor['photo'];
+    }
+    // Check for photo_url field
+    else if (visitor.containsKey('photo_url') && visitor['photo_url'] != null) {
+      photoPath = visitor['photo_url'];
+    }
+
+    if (photoPath == null || photoPath.isEmpty) return '';
+
+    // If it's already a full URL, convert HTTP to HTTPS
+    if (photoPath.startsWith('http')) {
+      if (photoPath.startsWith('http://')) {
+        return photoPath.replaceFirst('http://', 'https://');
+      }
+      return photoPath;
+    }
+
+    // Otherwise, prepend the base URL (same as Pending Approvals Page)
+    if (photoPath.startsWith('/')) {
+      return '$baseUrl$photoPath';
+    } else {
+      return '$baseUrl/$photoPath';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final status = visitor['status'] ?? 'pending';
     final statusColor = _getStatusColor(status);
     final createdBy = visitor['created_by_details'];
+    final imageUrl = _getImageUrl();
+
+    print(
+        'Visitor: ${visitor['full_name']}, Image URL: $imageUrl'); // Debug print
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -2055,13 +2103,36 @@ class _VisitorCard extends StatelessWidget {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
-                        child: visitor['photo_display_url'] != null
+                        child: imageUrl.isNotEmpty
                             ? Image.network(
-                                visitor['photo_display_url'],
+                                imageUrl,
                                 width: 50,
                                 height: 50,
                                 fit: BoxFit.cover,
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                loadingProgress
+                                                    .expectedTotalBytes!
+                                            : null,
+                                      ),
+                                    ),
+                                  );
+                                },
                                 errorBuilder: (context, error, stackTrace) {
+                                  print(
+                                      'Error loading image for ${visitor['full_name']}: $error');
                                   return const Icon(Icons.person,
                                       color: Colors.blue, size: 28);
                                 },
@@ -2205,3 +2276,240 @@ class _VisitorCard extends StatelessWidget {
     );
   }
 }
+
+// class _VisitorCard extends StatelessWidget {
+//   final Map<String, dynamic> visitor;
+
+//   const _VisitorCard({required this.visitor});
+
+//   Color _getStatusColor(String status) {
+//     switch (status.toLowerCase()) {
+//       case 'approved':
+//         return Colors.green;
+//       case 'pending':
+//         return Colors.orange;
+//       case 'partially_approved':
+//         return Colors.blue;
+//       case 'rejected':
+//         return Colors.red;
+//       case 'checked_in':
+//         return Colors.blue;
+//       case 'checked_out':
+//         return Colors.grey;
+//       case 'no_show':
+//         return Colors.brown;
+//       case 'cancelled':
+//         return Colors.redAccent;
+//       default:
+//         return Colors.grey;
+//     }
+//   }
+
+//   String _formatDateTime(String? dateTimeString) {
+//     if (dateTimeString == null || dateTimeString.isEmpty) return 'N/A';
+//     try {
+//       DateTime dateTime = DateTime.parse(dateTimeString);
+//       return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+//     } catch (e) {
+//       return dateTimeString;
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final status = visitor['status'] ?? 'pending';
+//     final statusColor = _getStatusColor(status);
+//     final createdBy = visitor['created_by_details'];
+
+//     return Container(
+//       margin: const EdgeInsets.only(bottom: 12),
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         borderRadius: BorderRadius.circular(16),
+//         boxShadow: [
+//           BoxShadow(
+//             color: Colors.black.withOpacity(0.03),
+//             blurRadius: 8,
+//             offset: const Offset(0, 2),
+//           ),
+//         ],
+//       ),
+//       child: Material(
+//         color: Colors.transparent,
+//         child: InkWell(
+//           onTap: () {
+//             Navigator.push(
+//               context,
+//               MaterialPageRoute(
+//                 builder: (context) => VisitorViewPage(visitorData: visitor),
+//               ),
+//             );
+//           },
+//           borderRadius: BorderRadius.circular(16),
+//           child: Padding(
+//             padding: const EdgeInsets.all(16),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Row(
+//                   children: [
+//                     // Photo or Avatar
+//                     Container(
+//                       width: 50,
+//                       height: 50,
+//                       decoration: BoxDecoration(
+//                         color: Colors.blue.withOpacity(0.1),
+//                         borderRadius: BorderRadius.circular(12),
+//                       ),
+//                       child: ClipRRect(
+//                         borderRadius: BorderRadius.circular(12),
+//                         child: visitor['photo_display_url'] != null
+//                             ? Image.network(
+//                                 visitor['photo_display_url'],
+//                                 width: 50,
+//                                 height: 50,
+//                                 fit: BoxFit.cover,
+//                                 errorBuilder: (context, error, stackTrace) {
+//                                   return const Icon(Icons.person,
+//                                       color: Colors.blue, size: 28);
+//                                 },
+//                               )
+//                             : const Icon(Icons.person,
+//                                 color: Colors.blue, size: 28),
+//                       ),
+//                     ),
+//                     const SizedBox(width: 12),
+//                     Expanded(
+//                       child: Column(
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: [
+//                           Text(
+//                             visitor['full_name'] ?? 'Unknown',
+//                             style: const TextStyle(
+//                               fontSize: 16,
+//                               fontWeight: FontWeight.bold,
+//                             ),
+//                             overflow: TextOverflow.ellipsis,
+//                           ),
+//                           const SizedBox(height: 4),
+//                           Text(
+//                             visitor['email'] ?? 'No email',
+//                             style: TextStyle(
+//                               fontSize: 12,
+//                               color: Colors.grey[600],
+//                             ),
+//                             overflow: TextOverflow.ellipsis,
+//                           ),
+//                           if (createdBy != null) ...[
+//                             const SizedBox(height: 2),
+//                             Text(
+//                               'Created by: ${createdBy['full_name'] ?? 'Unknown'}',
+//                               style: TextStyle(
+//                                 fontSize: 10,
+//                                 color: Colors.grey[500],
+//                               ),
+//                             ),
+//                           ],
+//                         ],
+//                       ),
+//                     ),
+//                     Container(
+//                       padding: const EdgeInsets.symmetric(
+//                         horizontal: 10,
+//                         vertical: 4,
+//                       ),
+//                       decoration: BoxDecoration(
+//                         color: statusColor.withOpacity(0.1),
+//                         borderRadius: BorderRadius.circular(12),
+//                       ),
+//                       child: Text(
+//                         status.toUpperCase().replaceAll('_', ' '),
+//                         style: TextStyle(
+//                           fontSize: 10,
+//                           fontWeight: FontWeight.w600,
+//                           color: statusColor,
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 const SizedBox(height: 12),
+//                 const Divider(height: 1),
+//                 const SizedBox(height: 12),
+//                 // Check-in/Check-out times
+//                 Row(
+//                   children: [
+//                     Icon(Icons.login, size: 14, color: Colors.grey[500]),
+//                     const SizedBox(width: 6),
+//                     Expanded(
+//                       child: Text(
+//                         'Check-in: ${_formatDateTime(visitor['designated_check_in'])}',
+//                         style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+//                         overflow: TextOverflow.ellipsis,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 const SizedBox(height: 6),
+//                 Row(
+//                   children: [
+//                     Icon(Icons.logout, size: 14, color: Colors.grey[500]),
+//                     const SizedBox(width: 6),
+//                     Expanded(
+//                       child: Text(
+//                         'Check-out: ${_formatDateTime(visitor['designated_check_out'])}',
+//                         style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+//                         overflow: TextOverflow.ellipsis,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 // Purpose of visit if available
+//                 if (visitor['purpose_of_visit'] != null &&
+//                     visitor['purpose_of_visit'].toString().isNotEmpty) ...[
+//                   const SizedBox(height: 8),
+//                   Row(
+//                     children: [
+//                       Icon(Icons.info_outline,
+//                           size: 14, color: Colors.grey[500]),
+//                       const SizedBox(width: 6),
+//                       Expanded(
+//                         child: Text(
+//                           visitor['purpose_of_visit'],
+//                           style:
+//                               TextStyle(fontSize: 12, color: Colors.grey[600]),
+//                           maxLines: 1,
+//                           overflow: TextOverflow.ellipsis,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ],
+//                 // Approval progress indicator
+//                 if (visitor['approval_progress'] != null) ...[
+//                   const SizedBox(height: 8),
+//                   Row(
+//                     children: [
+//                       Icon(Icons.verified, size: 14, color: Colors.green[400]),
+//                       const SizedBox(width: 6),
+//                       Expanded(
+//                         child: Text(
+//                           'Access: ${visitor['approval_progress']['accessible_sections_count'] ?? 0}/${visitor['approval_progress']['total_sections'] ?? 0} sections',
+//                           style: TextStyle(
+//                             fontSize: 11,
+//                             color: Colors.green[700],
+//                             fontWeight: FontWeight.w500,
+//                           ),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ],
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

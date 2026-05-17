@@ -1215,4 +1215,77 @@ class ApiService {
       throw Exception('Failed to create visitor with photo: $responseBody');
     }
   }
+
+  // Add these methods to your ApiService class
+
+// Cooldown Management (Superadmin only)
+  static Future<List<dynamic>> getCooldownPeriods() async {
+    final accessToken = await getAccessToken();
+    if (accessToken == null) {
+      throw Exception('No access token available');
+    }
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/account/api/admin/cooldowns/'),
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception(
+          'Failed to load cooldown periods: ${response.statusCode}');
+    }
+  }
+
+  static Future<Map<String, dynamic>> getCooldownPeriodDetail(int id) async {
+    final accessToken = await getAccessToken();
+    if (accessToken == null) {
+      throw Exception('No access token available');
+    }
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/account/api/admin/cooldowns/$id/'),
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception(
+          'Failed to load cooldown period details: ${response.statusCode}');
+    }
+  }
+
+  static Future<void> savePendingVisitorId(int visitorId) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt('pending_visitor_id', visitorId);
+      print('Saved pending visitor ID: $visitorId');
+    } catch (e) {
+      print('Error saving pending visitor ID: $e');
+    }
+  }
+
+// Get and clear pending visitor ID
+  static Future<int?> getAndClearPendingVisitorId() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final visitorId = prefs.getInt('pending_visitor_id');
+      if (visitorId != null) {
+        await prefs.remove('pending_visitor_id');
+        print('Retrieved and cleared pending visitor ID: $visitorId');
+      }
+      return visitorId;
+    } catch (e) {
+      print('Error getting pending visitor ID: $e');
+      return null;
+    }
+  }
 }
