@@ -47,7 +47,8 @@ class TokenService {
   static const String _accessTokenKey = 'access_token';
   static const String _refreshTokenKey = 'refresh_token';
   // static const String baseUrl = 'http://127.0.0.1:8000/account';
-  static const String baseUrl = 'https://vms-backend-drf-avdygnb6afcchbhg.centralindia-01.azurewebsites.net/account';
+  static const String baseUrl =
+      'https://vms-backend-drf-new.azurewebsites.net/account';
 
   // Save tokens after login
   static Future<void> saveTokens(

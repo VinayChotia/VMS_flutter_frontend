@@ -272,7 +272,6 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
 import 'package:modernlogintute/components/my_button.dart';
 import 'package:modernlogintute/components/my_textfield.dart';
@@ -287,7 +286,7 @@ import 'package:modernlogintute/pages/visitor_view.dart';
 import 'package:modernlogintute/services/api_services.dart';
 
 const String baseUrl_login =
-    'https://vms-backend-drf-avdygnb6afcchbhg.centralindia-01.azurewebsites.net/account';
+    'https://vms-backend-drf-new.azurewebsites.net/account';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -300,10 +299,10 @@ class _LoginPageState extends State<LoginPage> {
   // text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  
+
   // Store pending visitor ID from QR code scan
   int? _pendingVisitorId;
-  
+
   // Loading state
   bool _isLoading = false;
 
@@ -364,7 +363,7 @@ class _LoginPageState extends State<LoginPage> {
           'password': password,
         }),
       );
-      
+
       final data = jsonDecode(response.body);
       print("Status: ${response.statusCode}");
       print("Response: ${response.body}");
@@ -375,7 +374,7 @@ class _LoginPageState extends State<LoginPage> {
           data['access'],
           data['refresh'],
         );
-        
+
         // Also save tokens in ApiService for consistency
         await ApiService.storeTokens(data['access'], data['refresh']);
 
@@ -408,7 +407,7 @@ class _LoginPageState extends State<LoginPage> {
       } else {
         // Show error message
         String errorMessage = "Login failed";
-        
+
         try {
           if (data.containsKey('error')) {
             errorMessage = data['error'];
@@ -468,7 +467,8 @@ class _LoginPageState extends State<LoginPage> {
                 // Show pending visitor info if any
                 if (_pendingVisitorId != null)
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Colors.blue.shade50,
@@ -477,7 +477,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.qr_code_scanner, color: Colors.blue.shade700),
+                        Icon(Icons.qr_code_scanner,
+                            color: Colors.blue.shade700),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
@@ -544,7 +545,8 @@ class _LoginPageState extends State<LoginPage> {
                           // TODO: Implement forgot password
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text("Forgot Password feature coming soon!"),
+                              content:
+                                  Text("Forgot Password feature coming soon!"),
                               backgroundColor: Colors.orange,
                             ),
                           );

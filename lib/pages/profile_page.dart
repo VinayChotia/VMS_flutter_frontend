@@ -1133,8 +1133,7 @@ import 'package:http/http.dart' as http;
 import 'package:modernlogintute/components/token_services.dart';
 import 'dart:convert';
 
-const String baseUrl =
-    'https://vms-backend-drf-avdygnb6afcchbhg.centralindia-01.azurewebsites.net';
+const String baseUrl = 'https://vms-backend-drf-new.azurewebsites.net';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

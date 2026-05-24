@@ -909,8 +909,7 @@ import 'package:flutter/material.dart';
 import 'package:modernlogintute/services/api_services.dart';
 import 'package:intl/intl.dart';
 
-const String baseUrl =
-    'https://vms-backend-drf-avdygnb6afcchbhg.centralindia-01.azurewebsites.net';
+const String baseUrl = 'https://vms-backend-drf-new.azurewebsites.net';
 
 class PendingApprovalsPage extends StatefulWidget {
   const PendingApprovalsPage({super.key});

@@ -9,8 +9,7 @@ import 'package:http_parser/http_parser.dart';
 
 class ApiService {
   // static const String baseUrl = 'http://127.0.0.1:8000';
-  static const String baseUrl =
-      'https://vms-backend-drf-avdygnb6afcchbhg.centralindia-01.azurewebsites.net';
+  static const String baseUrl = 'https://vms-backend-drf-new.azurewebsites.net';
   static const String _accessTokenKey = 'access_token';
   static const String _refreshTokenKey = 'refresh_token';
 

@@ -2008,8 +2008,7 @@ class _VisitorCard extends StatelessWidget {
   }
 
   String _getImageUrl() {
-    const String baseUrl =
-        'https://vms-backend-drf-avdygnb6afcchbhg.centralindia-01.azurewebsites.net';
+    const String baseUrl = 'https://vms-backend-drf-new.azurewebsites.net';
 
     // Try to get the photo URL - same logic as Pending Approvals page
     String? photoPath;
