@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modernlogintute/services/api_services.dart';
+import 'package:intl/intl.dart';
+import 'package:go_router/go_router.dart';
 
 class CooldownPeriodsPage extends StatefulWidget {
   const CooldownPeriodsPage({super.key});
@@ -49,7 +51,7 @@ class _CooldownPeriodsPageState extends State<CooldownPeriodsPage> {
     if (dateTimeString == null) return 'Not specified';
     try {
       final dateTime = DateTime.parse(dateTimeString);
-      return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+      return DateFormat('dd/MM/yyyy HH:mm').format(dateTime);
     } catch (e) {
       return dateTimeString;
     }
@@ -65,6 +67,8 @@ class _CooldownPeriodsPageState extends State<CooldownPeriodsPage> {
         return 'Daily';
       case 'weekly':
         return 'Weekly';
+      case 'emergency':
+        return 'Emergency';
       default:
         return type;
     }
@@ -125,15 +129,23 @@ class _CooldownPeriodsPageState extends State<CooldownPeriodsPage> {
                   ),
                 )
               : _cooldownPeriods.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.timer_off, size: 64, color: Colors.grey),
-                          SizedBox(height: 16),
-                          Text(
+                          const Icon(Icons.timer_off,
+                              size: 64, color: Colors.grey),
+                          const SizedBox(height: 16),
+                          const Text(
                             'No cooldown periods found',
                             style: TextStyle(color: Colors.grey),
+                          ),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () => context
+                                .push('/cooldown-periods/create')
+                                .then((_) => _fetchCooldownPeriods()),
+                            child: const Text('Create Cooldown Period'),
                           ),
                         ],
                       ),
@@ -271,11 +283,345 @@ class _CooldownPeriodsPageState extends State<CooldownPeriodsPage> {
                         );
                       },
                     ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context
+            .push('/cooldown-periods/create')
+            .then((_) => _fetchCooldownPeriods()),
+        backgroundColor: Colors.black,
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
     );
   }
 }
 
-// Detail Page for Cooldown Period
+class CreateCooldownPeriodPage extends StatefulWidget {
+  const CreateCooldownPeriodPage({super.key});
+
+  @override
+  State<CreateCooldownPeriodPage> createState() =>
+      _CreateCooldownPeriodPageState();
+}
+
+class _CreateCooldownPeriodPageState extends State<CreateCooldownPeriodPage> {
+  final _formKey = GlobalKey<FormState>();
+  int? _selectedSiteId;
+  String _selectedType = 'one_time';
+  DateTime _startDateTime = DateTime.now();
+  DateTime _endDateTime = DateTime.now().add(const Duration(hours: 1));
+  TimeOfDay? _startTime;
+  TimeOfDay? _endTime;
+  final _reasonController = TextEditingController();
+
+  List<dynamic> _sites = [];
+  bool _isLoadingSites = true;
+  bool _isSubmitting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchSites();
+  }
+
+  Future<void> _fetchSites() async {
+    try {
+      final sites = await ApiService.getSites();
+      setState(() {
+        _sites = sites;
+        if (_sites.isNotEmpty) {
+          _selectedSiteId = _sites.first['id'];
+        }
+        _isLoadingSites = false;
+      });
+    } catch (e) {
+      setState(() => _isLoadingSites = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load sites: $e')),
+      );
+    }
+  }
+
+  Future<void> _submit() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isSubmitting = true);
+
+    try {
+      final employee = await ApiService.getCurrentEmployee();
+      final int createdBy = employee['id'];
+
+      final data = {
+        'site': _selectedSiteId,
+        'cooldown_type': _selectedType,
+        'start_datetime': _startDateTime.toIso8601String(),
+        'end_datetime': _endDateTime.toIso8601String(),
+        'reason': _reasonController.text,
+        'created_by': createdBy,
+        'is_active': true,
+      };
+
+      if (_selectedType == 'daily') {
+        if (_startTime != null) {
+          data['start_time'] =
+              '${_startTime!.hour.toString().padLeft(2, '0')}:${_startTime!.minute.toString().padLeft(2, '0')}:00';
+        }
+        if (_endTime != null) {
+          data['end_time'] =
+              '${_endTime!.hour.toString().padLeft(2, '0')}:${_endTime!.minute.toString().padLeft(2, '0')}:00';
+        }
+      }
+
+      await ApiService.createCooldownPeriod(data);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Cooldown period created successfully')),
+        );
+        context.pop();
+      }
+    } catch (e) {
+      setState(() => _isSubmitting = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text('Create Cooldown Period',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.pop(),
+        ),
+      ),
+      body: _isLoadingSites
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Cooldown Details',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 24),
+
+                    // Site Dropdown
+                    DropdownButtonFormField<int>(
+                      value: _selectedSiteId,
+                      decoration: const InputDecoration(
+                        labelText: 'Site',
+                        border: OutlineInputBorder(),
+                      ),
+                      items: _sites.map<DropdownMenuItem<int>>((site) {
+                        return DropdownMenuItem<int>(
+                          value: site['id'],
+                          child: Text(site['name'] ?? 'Site ${site['id']}'),
+                        );
+                      }).toList(),
+                      onChanged: (value) =>
+                          setState(() => _selectedSiteId = value),
+                      validator: (value) =>
+                          value == null ? 'Please select a site' : null,
+                    ),
+                    const SizedBox(height: 16),
+
+                    // Cooldown Type Dropdown
+                    DropdownButtonFormField<String>(
+                      value: _selectedType,
+                      decoration: const InputDecoration(
+                        labelText: 'Cooldown Type',
+                        border: OutlineInputBorder(),
+                      ),
+                      items: const [
+                        DropdownMenuItem(
+                            value: 'daily', child: Text('Daily Recurring')),
+                        DropdownMenuItem(
+                            value: 'one_time', child: Text('One Time')),
+                        DropdownMenuItem(
+                            value: 'emergency', child: Text('Emergency')),
+                      ],
+                      onChanged: (value) =>
+                          setState(() => _selectedType = value!),
+                    ),
+                    const SizedBox(height: 24),
+
+                    const Text('Schedule',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w600)),
+                    const SizedBox(height: 12),
+
+                    // Start Date Time
+                    InkWell(
+                      onTap: () async {
+                        final date = await showDatePicker(
+                          context: context,
+                          initialDate: _startDateTime,
+                          firstDate: DateTime.now(),
+                          lastDate:
+                              DateTime.now().add(const Duration(days: 365)),
+                        );
+                        if (date != null) {
+                          final time = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay.fromDateTime(_startDateTime),
+                          );
+                          if (time != null) {
+                            setState(() {
+                              _startDateTime = DateTime(date.year, date.month,
+                                  date.day, time.hour, time.minute);
+                            });
+                          }
+                        }
+                      },
+                      child: InputDecorator(
+                        decoration: const InputDecoration(
+                          labelText: 'Start Date & Time',
+                          border: OutlineInputBorder(),
+                          suffixIcon: Icon(Icons.calendar_today),
+                        ),
+                        child: Text(DateFormat('dd/MM/yyyy HH:mm')
+                            .format(_startDateTime)),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    // End Date Time
+                    InkWell(
+                      onTap: () async {
+                        final date = await showDatePicker(
+                          context: context,
+                          initialDate: _endDateTime,
+                          firstDate: _startDateTime,
+                          lastDate:
+                              DateTime.now().add(const Duration(days: 365)),
+                        );
+                        if (date != null) {
+                          final time = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay.fromDateTime(_endDateTime),
+                          );
+                          if (time != null) {
+                            setState(() {
+                              _endDateTime = DateTime(date.year, date.month,
+                                  date.day, time.hour, time.minute);
+                            });
+                          }
+                        }
+                      },
+                      child: InputDecorator(
+                        decoration: const InputDecoration(
+                          labelText: 'End Date & Time',
+                          border: OutlineInputBorder(),
+                          suffixIcon: Icon(Icons.calendar_today),
+                        ),
+                        child: Text(DateFormat('dd/MM/yyyy HH:mm')
+                            .format(_endDateTime)),
+                      ),
+                    ),
+
+                    if (_selectedType == 'daily') ...[
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              onTap: () async {
+                                final time = await showTimePicker(
+                                  context: context,
+                                  initialTime: _startTime ?? TimeOfDay.now(),
+                                );
+                                if (time != null)
+                                  setState(() => _startTime = time);
+                              },
+                              child: InputDecorator(
+                                decoration: const InputDecoration(
+                                  labelText: 'Daily Start',
+                                  border: OutlineInputBorder(),
+                                ),
+                                child: Text(
+                                    _startTime?.format(context) ?? 'Set Time'),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () async {
+                                final time = await showTimePicker(
+                                  context: context,
+                                  initialTime: _endTime ?? TimeOfDay.now(),
+                                );
+                                if (time != null)
+                                  setState(() => _endTime = time);
+                              },
+                              child: InputDecorator(
+                                decoration: const InputDecoration(
+                                  labelText: 'Daily End',
+                                  border: OutlineInputBorder(),
+                                ),
+                                child: Text(
+                                    _endTime?.format(context) ?? 'Set Time'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+
+                    const SizedBox(height: 24),
+
+                    // Reason
+                    TextFormField(
+                      controller: _reasonController,
+                      decoration: const InputDecoration(
+                        labelText: 'Reason for Cooldown',
+                        border: OutlineInputBorder(),
+                        alignLabelWithHint: true,
+                      ),
+                      maxLines: 4,
+                      validator: (value) => value == null || value.isEmpty
+                          ? 'Please enter a reason'
+                          : null,
+                    ),
+                    const SizedBox(height: 32),
+
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: _isSubmitting ? null : _submit,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                        ),
+                        child: _isSubmitting
+                            ? const CircularProgressIndicator(
+                                color: Colors.white)
+                            : const Text('Create Cooldown Period',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                  ],
+                ),
+              ),
+            ),
+    );
+  }
+}
+
+// Detail Page for Cooldown Period (SINGLE DEFINITION)
 class CooldownPeriodDetailPage extends StatefulWidget {
   final int periodId;
 
@@ -327,25 +673,7 @@ class _CooldownPeriodDetailPageState extends State<CooldownPeriodDetailPage> {
     if (dateTimeString == null) return 'Not specified';
     try {
       final dateTime = DateTime.parse(dateTimeString);
-      final day = dateTime.day.toString().padLeft(2, '0');
-      final month = dateTime.month.toString().padLeft(2, '0');
-      final year = dateTime.year;
-      final hour = dateTime.hour.toString().padLeft(2, '0');
-      final minute = dateTime.minute.toString().padLeft(2, '0');
-      return '$day/$month/$year $hour:$minute';
-    } catch (e) {
-      return dateTimeString;
-    }
-  }
-
-  String _formatDateOnly(String? dateTimeString) {
-    if (dateTimeString == null) return 'Not specified';
-    try {
-      final dateTime = DateTime.parse(dateTimeString);
-      final day = dateTime.day.toString().padLeft(2, '0');
-      final month = dateTime.month.toString().padLeft(2, '0');
-      final year = dateTime.year;
-      return '$day/$month/$year';
+      return DateFormat('dd/MM/yyyy HH:mm').format(dateTime);
     } catch (e) {
       return dateTimeString;
     }
@@ -361,6 +689,8 @@ class _CooldownPeriodDetailPageState extends State<CooldownPeriodDetailPage> {
         return 'Daily Cooldown';
       case 'weekly':
         return 'Weekly Cooldown';
+      case 'emergency':
+        return 'Emergency Cooldown';
       default:
         return type;
     }

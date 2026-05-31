@@ -677,133 +677,6 @@ class ApiService {
     }
   }
 
-  // lib/services/api_services.dart - Fix the approveSection method
-
-// Approve or reject a specific section for a visitor
-  // static Future<Map<String, dynamic>> approveSection(
-  //   int visitorId,
-  //   int sectionId,
-  //   String status, {
-  //   String? comments,
-  // }) async {
-  //   try {
-  //     final token = await getAccessToken();
-  //     if (token == null) {
-  //       throw Exception('No authentication token found');
-  //     }
-
-  //     // Build the request body in the correct format
-  //     final Map<String, dynamic> requestBody = {
-  //       'section_approvals': [
-  //         {
-  //           'section_id': sectionId,
-  //           'status': status,
-  //           'comments': comments ?? '',
-  //         }
-  //       ]
-  //     };
-
-  //     print('printing request body $requestBody');
-
-  //     final response = await http.post(
-  //       Uri.parse('$baseUrl/account/api/visitors/$visitorId/approve-sections/'),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': 'Bearer $token',
-  //       },
-  //       body: jsonEncode(requestBody),
-  //     );
-
-  //     print('Approve section response status: ${response.statusCode}');
-  //     print('Approve section response body: ${response.body}');
-
-  //     if (response.statusCode == 200) {
-  //       return jsonDecode(response.body);
-  //     } else {
-  //       final errorData = jsonDecode(response.body);
-  //       throw Exception(errorData['error'] ?? 'Failed to process approval');
-  //     }
-  //   } catch (e) {
-  //     throw Exception('Error processing approval: $e');
-  //   }
-  // }
-
-  // lib/services/api_services.dart - Corrected approveSection method
-
-// Approve or reject a specific section for a visitor
-  // static Future<Map<String, dynamic>> approveSection(
-  //   int visitorId,
-  //   int sectionId,
-  //   String status, {
-  //   String? comments,
-  // }) async {
-  //   try {
-  //     final token = await getAccessToken();
-  //     if (token == null) {
-  //       throw Exception('No authentication token found');
-  //     }
-
-  //     // Build the request body in the exact format expected by Django
-  //     final Map<String, dynamic> requestBody = {
-  //       'section_approvals': [
-  //         {
-  //           'section_id': sectionId,
-  //           'status': status, // Must be 'approved' or 'rejected'
-  //           'comments': comments?.trim() ??
-  //               (status == 'approved' ? 'Approved' : 'Rejected'),
-  //         }
-  //       ]
-  //     };
-
-  //     // Debug logging
-  //     print('=' * 50);
-  //     print('📤 APPROVE SECTION REQUEST:');
-  //     print('URL: $baseUrl/account/api/visitors/$visitorId/approve-sections/');
-  //     print('Body: ${jsonEncode(requestBody)}');
-  //     print('=' * 50);
-
-  //     final response = await http.post(
-  //       Uri.parse('$baseUrl/account/api/visitors/$visitorId/approve-sections/'),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': 'Bearer $token',
-  //       },
-  //       body: jsonEncode(requestBody),
-  //     );
-
-  //     print('📥 RESPONSE:');
-  //     print('Status: ${response.statusCode}');
-  //     print('Body: ${response.body}');
-  //     print('=' * 50);
-
-  //     if (response.statusCode == 200 || response.statusCode == 201) {
-  //       final Map<String, dynamic> responseData = jsonDecode(response.body);
-
-  //       // Check if the response indicates success
-  //       if (responseData['success'] == true ||
-  //           responseData['visitor_status'] != null) {
-  //         return responseData;
-  //       } else {
-  //         throw Exception(responseData['message'] ??
-  //             responseData['error'] ??
-  //             'Failed to process approval');
-  //       }
-  //     } else {
-  //       final errorData = jsonDecode(response.body);
-  //       throw Exception(errorData['error'] ??
-  //           errorData['message'] ??
-  //           'Failed to process approval (Status: ${response.statusCode})');
-  //     }
-  //   } catch (e) {
-  //     print('❌ Error in approveSection: $e');
-  //     throw Exception('Error processing approval: $e');
-  //   }
-  // }
-
-  // lib/services/api_services.dart - Fixed approveSection method
-
-  // lib/services/api_services.dart - Complete fix
-
   static Future<Map<String, dynamic>> approveSection(
     int visitorId,
     int sectionId,
@@ -876,34 +749,6 @@ class ApiService {
       rethrow;
     }
   }
-
-  // static Future<Uint8List?> exportVisitorsReport(
-  //   DateTime startDate,
-  //   DateTime endDate, {
-  //   String status = 'all',
-  // }) async {
-  //   try {
-  //     final token = await getAccessToken();
-  //     if (token == null) throw Exception('No authentication token found');
-
-  //     final response = await http.get(
-  //       Uri.parse(
-  //           '$baseUrl/account/api/export/visitors/?start_date=${startDate.toIso8601String().split('T')[0]}&end_date=${endDate.toIso8601String().split('T')[0]}&status=$status'),
-  //       headers: {
-  //         'Authorization': 'Bearer $token',
-  //       },
-  //     );
-
-  //     if (response.statusCode == 200) {
-  //       return response.bodyBytes;
-  //     } else {
-  //       throw Exception('Failed to export report');
-  //     }
-  //   } catch (e) {
-  //     print('Error exporting report: $e');
-  //     rethrow;
-  //   }
-  // }
 
   static Future<Uint8List?> exportVisitorsReport(
     DateTime startDate,
@@ -1259,6 +1104,30 @@ class ApiService {
     } else {
       throw Exception(
           'Failed to load cooldown period details: ${response.statusCode}');
+    }
+  }
+
+  static Future<Map<String, dynamic>> createCooldownPeriod(
+      Map<String, dynamic> data) async {
+    final accessToken = await getAccessToken();
+    if (accessToken == null) {
+      throw Exception('No access token available');
+    }
+
+    final response = await http.post(
+      Uri.parse('$baseUrl/account/api/admin/cooldowns/'),
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode(data),
+    );
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      final error = json.decode(response.body);
+      throw Exception(error['error'] ?? 'Failed to create cooldown period');
     }
   }
 

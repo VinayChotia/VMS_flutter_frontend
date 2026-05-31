@@ -4,18 +4,20 @@ class MyTextField extends StatelessWidget {
   final controller;
   final String hintText;
   final bool obscureText;
+  final double horizontalPadding;
 
   const MyTextField({
     super.key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
+    this.horizontalPadding = 25.0,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
       child: TextField(
         controller: controller,
         obscureText: obscureText,
@@ -35,29 +37,30 @@ class MyTextField extends StatelessWidget {
   }
 }
 
-
 class MyTextFieldValidator extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
-  final String? Function(String?)? validator;  // ← Add validator
+  final String? Function(String?)? validator;
+  final double horizontalPadding;
 
   const MyTextFieldValidator({
     super.key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
-    this.validator,  // ← Make it optional
+    this.validator,
+    this.horizontalPadding = 25.0,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextFormField(  // ← Changed from TextField to TextFormField
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      child: TextFormField(
         controller: controller,
         obscureText: obscureText,
-        validator: validator,  // ← Pass validator to TextFormField
+        validator: validator,
         decoration: InputDecoration(
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
@@ -65,11 +68,11 @@ class MyTextFieldValidator extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey.shade400),
           ),
-          errorBorder: OutlineInputBorder(  // ← Add error border style
+          errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.red),
             borderRadius: BorderRadius.circular(8),
           ),
-          focusedErrorBorder: OutlineInputBorder(  // ← Add focused error style
+          focusedErrorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.red, width: 2),
             borderRadius: BorderRadius.circular(8),
           ),
@@ -77,7 +80,7 @@ class MyTextFieldValidator extends StatelessWidget {
           filled: true,
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.grey[500]),
-          errorStyle: const TextStyle(  // ← Style for error message
+          errorStyle: const TextStyle(
             fontSize: 12,
             color: Colors.red,
           ),
